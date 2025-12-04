@@ -10,8 +10,16 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@paddle/paddle-js": "^1.5.1",
+    "@tailwindcss/vite": "^4.1.17",
     "nuxt": "^4.2.1",
+    "tailwindcss": "^4.1.17",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.18.1",
+    "@nuxt/typescript-build": "^3.0.2",
+    "typescript": "^5.9.3"
   }
 }
