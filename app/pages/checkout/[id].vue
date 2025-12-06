@@ -1,19 +1,13 @@
 <script lang="ts" setup>
+import {useHead} from "#imports";
+
 const route = useRoute()
 import {type CheckoutEventsTotals, initializePaddle} from '@paddle/paddle-js';
 
 let pricingInfo = ref<{
   currency: string,
   pricing: CheckoutEventsTotals,
-}>({
-  currency: '$',
-  pricing: {
-    subtotal: 17.01,
-    tax: 2.99,
-    total: 20.01,
-    discount: 0,
-  }
-});
+} | null>(null);
 
 const paddle = await initializePaddle({
   environment: 'sandbox', token: 'test_5ab60d9d332161a26e0cfe66605', checkout: {
@@ -29,7 +23,6 @@ const paddle = await initializePaddle({
     console.log(event)
     if (!event.name)
       return;
-
     const item = event.data?.items[0];
     pricingInfo.value = {
       currency: event.data!.currency_code,
@@ -49,16 +42,32 @@ onMounted(() => {
   });
 })
 
+useHead(
+    {
+      bodyAttrs: {
+        class: 'h-full bg-checkout'
+      },
+      htmlAttrs: {
+        class: 'h-full'
+      }
+    }
+)
 
 </script>
 
-<template class="flex flex-row">
-  <div class="w-[450px]">
-    <CheckoutInfo name="Billing frequency" value="Yearly"></CheckoutInfo>
-    <CheckoutInfo name="Plan" value="Individual"></CheckoutInfo>
-    <CheckoutInfo :prefix="pricingInfo.currency" name="Subtotal" :value="pricingInfo.pricing.subtotal.toString()"></CheckoutInfo>
-    <CheckoutInfo :prefix="pricingInfo.currency" name="Vat" :value="pricingInfo.pricing.tax.toString()"></CheckoutInfo>
-    <CheckoutInfo :prefix="pricingInfo.currency" name="Total" :value="pricingInfo?.pricing.total.toString()"></CheckoutInfo>
+<template>
+  <div class="flex flex-col h-full md:flex-row">
+    <div class="flex-1 bg-neutral justify-center mt-20 mb-4 bg-checkout h-full "  v-if="pricingInfo != null">
+      <div class="justify-self-center ml-20">
+        <span class="text-muted">Subscribe to Postchi Pro</span><br>
+        <span class="text-4xl">{{ pricingInfo.currency }} {{
+            pricingInfo.pricing.total
+          }}</span><span> per year</span><br>
+        <span class="text-muted">Access to all features with one year of updates<br>
+own all the versions released during your subscription</span>
+      </div>
+    </div>
+    <div class="flex-1 bg-white h-dvh" v-if="pricingInfo == null"></div>
+    <div class="checkout-container flex-1 bg-white h-dvh"></div>
   </div>
-  <div class="checkout-container"></div>
 </template>
