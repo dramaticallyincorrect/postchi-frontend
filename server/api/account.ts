@@ -4,7 +4,7 @@ export interface Account {
     type: AccountType;
 }
 
-enum AccountType {
-    Individual,
-    Organization
+export enum AccountType {
+    Individual = 'Individual',
+    Organisation = 'Organisation'
 }

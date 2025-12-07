@@ -29,7 +29,7 @@ async function login(e: Event) {
     }
   }).then(data => {
     localStorage.setItem('token', data.token);
-    navigateTo('/dashboard/admin')
+    navigateTo('/dashboard')
   }).catch(err => {
     error.value = 'incorrect username or password';
   }).finally(() => {
