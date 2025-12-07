@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/ui": "^4.2.1",
     "@paddle/paddle-js": "^1.5.1",
     "@tailwindcss/vite": "^4.1.17",
     "nuxt": "^4.2.1",

@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     compatibilityDate: '2025-07-15',
     devtools: {enabled: true},
     routeRules: {
-        '/dashboard': {ssr: false}
+        '/dashboard': {ssr: false},
+        '/dashboard/admin': {ssr: false}
     },
     vite: {
         plugins: [
@@ -13,4 +14,5 @@ export default defineNuxtConfig({
         ],
     },
     css: ['./app/assets/css/main.css'],
+    modules: ['@nuxt/ui']
 })
