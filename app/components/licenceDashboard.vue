@@ -3,23 +3,13 @@ import type {Licence} from "~~/server/api/licence";
 
 let toast = useToast();
 
-let {token} = defineProps<{
-  token: string,
-}>()
-
-let {data: licences, pending, error, refresh} = useFetch<Licence[]>('http://localhost:8080/licences', {
+let {data: licences, pending, error, refresh} = useFetch<Licence[]>('http://localhost:8080/dashboard/licences', {
   method: 'GET',
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
 });
 
 function deleteLicence(licence: Licence, e: Event) {
-  $fetch(`http://localhost:8080/licences/${licence.key}`, {
+  $fetch(`http://localhost:8080/dashboard/licences/${licence.key}`, {
     method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`
-    },
     onResponse: ({response, request, options}) => {
       if (response.ok) {
         licences.value = licences.value?.filter((value) => value.key != licence.key)
@@ -36,11 +26,8 @@ let email = ref('')
 
 async function inviteUser() {
   if (email.value.trim() != '') {
-    await $fetch<Licence | undefined>(`http://localhost:8080/subscription/invite?email=${email.value}`, {
+    await $fetch<Licence | undefined>(`http://localhost:8080/dashboard/subscription/invite?email=${email.value}`, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
       onResponse: async ({response, request, options}) => {
         if (response.ok) {
           toast.add({

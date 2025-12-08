@@ -2,11 +2,18 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+:root {
+    --ui-bg: #F5F5F4;
+}
+
+.dark {
+    --ui-bg: var(--ui-color-neutral-950);
+}
+
 @theme {
     --color-brand: #ffb325;
     --color-onbrand: #ffffff;
     --color-brand-strong: #d38900;
-    --color-checkout: #F5F5F4;
 
     --color-secondary: #64e073;
     --color-onsecondary: #ffffff;

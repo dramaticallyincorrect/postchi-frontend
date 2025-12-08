@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     devtools: {enabled: true},
     routeRules: {
         '/dashboard': {ssr: false},
-        '/dashboard/admin': {ssr: false}
+        '/dashboard/**': {ssr: false}
     },
     vite: {
         plugins: [
@@ -14,5 +14,14 @@ export default defineNuxtConfig({
         ],
     },
     css: ['./app/assets/css/main.css'],
-    modules: ['@nuxt/ui']
+    modules: ['@nuxt/ui'],
+    hooks: {
+        'pages:extend'(pages) {
+            pages.push({
+                name: 'dashboard',
+                path: '/dashboard',
+                file: '~/pages/dashboard/licence.vue'
+            })
+        }
+    }
 })

@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+definePageMeta({
+  layout: false,
+});
 import {useHead} from "#imports";
 
 const route = useRoute()
@@ -57,7 +60,7 @@ useHead(
 
 <template>
   <div class="flex flex-col h-full md:flex-row">
-    <div class="flex-1 bg-neutral justify-center mt-20 mb-4 bg-checkout h-full "  v-if="pricingInfo != null">
+    <div class="flex-1 bg-neutral justify-center mt-20 mb-4  h-full "  v-if="pricingInfo != null">
       <div class="justify-self-center ml-20">
         <span class="text-muted">Subscribe to Postchi Pro</span><br>
         <span class="text-4xl">{{ pricingInfo.currency }} {{

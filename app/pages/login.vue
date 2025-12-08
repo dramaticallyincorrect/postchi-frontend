@@ -1,5 +1,7 @@
 <script setup lang="ts">
-
+definePageMeta({
+  layout: false,
+});
 import {navigateTo} from "#app";
 
 let email = ref<string>('');
@@ -29,7 +31,7 @@ async function login(e: Event) {
     }
   }).then(data => {
     localStorage.setItem('token', data.token);
-    navigateTo('/dashboard')
+    navigateTo('/dashboard/licence')
   }).catch(err => {
     error.value = 'incorrect username or password';
   }).finally(() => {
