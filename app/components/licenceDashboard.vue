@@ -2,6 +2,7 @@
 import type {Licence} from "~~/server/api/licence";
 import * as v from "valibot";
 import type {FormSubmitEvent} from "@nuxt/ui";
+import {uniquesByKey} from "~/utils/list";
 
 let toast = useToast();
 
@@ -51,12 +52,11 @@ async function inviteUser(event: FormSubmitEvent<Schema>) {
             description: 'Licence has been generated',
             color: 'success'
           })
+          let licence = response._data as Licence;
+          licences.value = uniquesByKey(licences.value?.concat(licence) ?? [], 'key')
         }
 
-        if (response.status == 201) {
-          let licence = response._data as Licence;
-          licences.value = licences.value?.concat(licence)
-        } else if (response.status == 409) {
+        if (response.status == 409) {
           toast.add({
             title: 'user already has an activated licence',
             description: 'Delete active licence first',
