@@ -6,7 +6,8 @@ export default defineNuxtConfig({
     devtools: {enabled: true},
     routeRules: {
         '/dashboard': {ssr: false},
-        '/dashboard/**': {ssr: false}
+        '/dashboard/**': {ssr: false},
+        '/otp': {ssr: false},
     },
     vite: {
         plugins: [

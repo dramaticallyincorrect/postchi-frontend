@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type {Licence} from "~~/server/api/licence";
+import * as v from "valibot";
+import type {FormSubmitEvent} from "@nuxt/ui";
 
 let toast = useToast();
 
@@ -22,11 +24,25 @@ function deleteLicence(licence: Licence, e: Event) {
   });
 }
 
-let email = ref('')
+const schema = v.object({
+  email: v.pipe(v.string(), v.union([
+    v.literal(''),
+    v.pipe(
+        v.string(), // Re-validate it's a string (necessary when using union with literal)
+        v.email('Please enter a valid email address.')
+    )
+  ])),
+})
 
-async function inviteUser() {
-  if (email.value.trim() != '') {
-    await $fetch<Licence | undefined>(`http://localhost:8080/dashboard/subscription/invite?email=${email.value}`, {
+type Schema = v.InferOutput<typeof schema>
+
+const invitationState = reactive({
+  email: '',
+})
+
+async function inviteUser(event: FormSubmitEvent<Schema>) {
+  if (invitationState.email) {
+    await $fetch<Licence | undefined>(`http://localhost:8080/dashboard/subscription/invite?email=${invitationState.email}`, {
       method: 'POST',
       onResponse: async ({response, request, options}) => {
         if (response.ok) {
@@ -36,6 +52,7 @@ async function inviteUser() {
             color: 'success'
           })
         }
+
         if (response.status == 201) {
           let licence = response._data as Licence;
           licences.value = licences.value?.concat(licence)
@@ -57,12 +74,20 @@ async function inviteUser() {
   }
 }
 
+
 </script>
 
 <template>
-  <UContainer class="m-4 flex flex-row justify-end">
-    <UInput v-model="email" placeholder="user email"/>
-    <UButton label="Send Invitation" class="ml-2" v-on:click="inviteUser"/>
+  <UContainer>
+    <UForm :validate-on="[]" :schema="schema" :state="invitationState" @submit="inviteUser"
+           class="m-4 flex flex-row justify-end">
+      <UFormField name="email">
+        <UInput required placeholder="User email" v-model="invitationState.email" type="email" class="w-64"/>
+      </UFormField>
+      <UButton type="submit" class="h-8 ml-2">
+        Send Invitation
+      </UButton>
+    </UForm>
   </UContainer>
   <table class="w-full">
     <tr class="flex flex-row text-muted">

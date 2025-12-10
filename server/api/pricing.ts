@@ -5,10 +5,10 @@ export interface PricingPlan {
     info: [string]
 }
 
-export default defineEventHandler( (event) => {
+export default defineEventHandler((event) => {
     return [
         {
-            id: 'pri_01kb2cpzx27r6br7b636jxkvrt',
+            id: 'free',
             name: 'Free',
             total: '0',
             info: ['Core Features', 'No Updates']
