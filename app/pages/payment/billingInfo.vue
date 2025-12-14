@@ -5,7 +5,7 @@ import * as v from 'valibot'
 import type {FormSubmitEvent} from '@nuxt/ui'
 
 definePageMeta({
-  layout: false,
+  layout: 'header',
 });
 
 const route = useRoute();
@@ -77,8 +77,8 @@ async function onSubmit(event: FormSubmitEvent<Individual | Organization>) {
         <UInput v-model="state.numberOfSeats" type="number" class="w-64"/>
       </UFormField>
 
-      <UButton type="submit">
-        Submit
+      <UButton type="submit" variant="solid" >
+        Continue to Payment
       </UButton>
     </UForm>
   </div>
