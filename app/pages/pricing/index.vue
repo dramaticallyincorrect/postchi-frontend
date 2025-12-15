@@ -62,6 +62,14 @@ const sections = ref([
         }
       },
       {
+        title: 'Transferable Licences',
+        tiers: {
+          free: false,
+          individual: false,
+          teams: true
+        }
+      },
+      {
         title: 'Http',
         tiers: {
           free: true,
@@ -111,6 +119,22 @@ const sections = ref([
       },
       {
         title: 'Folder Scripts',
+        tiers: {
+          free: false,
+          individual: true,
+          teams: true
+        }
+      },
+      {
+        title: 'Email Support',
+        tiers: {
+          free: false,
+          individual: true,
+          teams: true
+        }
+      },
+      {
+        title: 'Roadmap Influence',
         tiers: {
           free: false,
           individual: true,
@@ -177,8 +201,8 @@ const faq = ref([
     content: 'These features such as websockets and graphql are not yet implemented but are planned and will be in later version of postchi, very soon!!'
   },
   {
-    label: 'What happens when subscription ends?',
-    content: 'You can keep using the last version that was released during the time of your subscription but updating to newer version will require a renewal to the subscription'
+    label: 'What happens when my subscription ends?',
+    content: 'You can keep using the last version that was released during the time of your subscription but updating to newer versions will require a subscription renewal'
   },
 ])
 
