@@ -57,29 +57,39 @@ async function onSubmit(event: FormSubmitEvent<Individual | Organization>) {
 
 
 <template>
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <UForm :schema="(id == individualId ? individualSchema : businessSchema)" :state="state" class="space-y-4"
-           @submit="onSubmit">
+  <div
+      class="mt-10 w-full flex flex-col items-center">
+    <h1 class="text-5xl font-bold">Buy Postchi</h1>
+    <h2 class="text-1xl mt-2">Streamline your apis with unlocked features</h2>
+    <UCard variant="outline" class="mt-8">
+      <UForm :schema="(id == individualId ? individualSchema : businessSchema)" :state="state" class="space-y-4 p-2"
+             @submit="onSubmit">
 
-      <UFormField label="Organization name" name="name" v-if="id == businessId">
-        <UInput v-model="state.name" type="text" class="w-64"/>
-      </UFormField>
+        <UFormField label="Organization name" name="name" v-if="id == businessId">
+          <UInput v-model="state.name" type="text" class="w-80"/>
+        </UFormField>
 
-      <UFormField label="Email" name="email">
-        <UInput v-model="state.email" type="email" class="w-64"/>
-      </UFormField>
+        <UFormField label="Email" name="email">
+          <UInput v-model="state.email" type="email" class="w-80"/>
+        </UFormField>
 
-      <UFormField label="Billing Email" name="billingEmail" v-if="id == businessId">
-        <UInput v-model="state.billingEmail" type="email" class="w-64"/>
-      </UFormField>
+        <UFormField label="Billing Email" name="billingEmail" v-if="id == businessId">
+          <UInput v-model="state.billingEmail" type="email" class="w-80"/>
+        </UFormField>
 
-      <UFormField label="Number of seats" name="numberOfSeats" v-if="id == businessId">
-        <UInput v-model="state.numberOfSeats" type="number" class="w-64"/>
-      </UFormField>
+        <UFormField label="Number of seats" name="numberOfSeats" v-if="id == businessId">
+          <UInput v-model="state.numberOfSeats" type="number" class="w-80"/>
+        </UFormField>
 
-      <UButton type="submit" variant="solid" >
-        Continue to Payment
-      </UButton>
-    </UForm>
+        <div class="flex flex-row justify-between" v-if="id == businessId">
+          <span>Total Amount</span>
+          <span>${{ state.numberOfSeats * 25 }}</span>
+        </div>
+
+        <UButton type="submit" variant="solid">
+          Continue to Payment
+        </UButton>
+      </UForm>
+    </UCard>
   </div>
 </template>
