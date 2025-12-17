@@ -3,7 +3,7 @@
 import type {Licence} from "~~/server/api/licence";
 import {type Subscription} from "~~/server/api/Subscription";
 
-let {data: licences} = useFetch<Licence[]>('http://localhost:8080/dashboard/licences', {
+let {data: licences} = useApi<Licence[]>('dashboard/licences', {
   method: 'GET',
 });
 
@@ -12,7 +12,7 @@ let {
   pending,
   error,
   refresh
-} = useFetch<Subscription>('http://localhost:8080/dashboard/subscription', {
+} = useApi<Subscription>('/dashboard/subscription', {
   method: 'GET',
 });
 

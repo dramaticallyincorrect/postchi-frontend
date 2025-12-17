@@ -35,8 +35,9 @@ definePageMeta({layout: 'header'});
       <div class="flex flex-col">
         <UIcon name="lucide:mail-question-mark" class="place-self-center m-6" size="64"></UIcon>
         <span class="text-3xl font-bold mb-2 text-highlighted">Have a question?</span>
-        <span class="text-1xl font-light">Send us an email</span>
-        <ULink to="/docs" class="mt-6 text-secondary-800 dark:text-secondary-400">Ask a question
+        <span class="text-1xl font-light">Contact us over email</span>
+        <ULink to="mailto:support@getpostchi.com" class="mt-6 text-secondary-800 dark:text-secondary-400">
+          Send email
           <UIcon name="ic:round-navigate-next" class=" align-middle" size="24"></UIcon>
         </ULink>
       </div>

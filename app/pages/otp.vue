@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {type TokenResponse} from "~~/server/api/TokenResponse";
+import {useApi} from "~/composable/useApi";
 
 definePageMeta({
   layout: false,
@@ -18,7 +19,7 @@ let route = useRoute()
 
 let otp = route.query.code;
 
-const {data: response, error} = await useFetch<TokenResponse>(`http://localhost:8080/otp?code=${otp}`, {
+const {data: response, error} = await useApi<TokenResponse>(`/otp?code=${otp}`, {
   method: 'POST'
 })
 

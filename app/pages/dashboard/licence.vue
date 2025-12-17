@@ -3,9 +3,10 @@ import {type Account, AccountType} from "~~/server/api/account";
 
 import LicenceDashboard from "~/components/licenceDashboard.vue";
 import IndividualLicence from "~/components/IndividualLicence.vue";
+import {useApi} from "~/composable/useApi";
 
 
-const {data: user} = useFetch<Account>('http://localhost:8080/dashboard/account', {
+const {data: user} = useApi<Account>('/dashboard/account', {
   method: 'GET',
 });
 

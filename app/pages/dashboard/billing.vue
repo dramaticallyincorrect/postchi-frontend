@@ -3,10 +3,12 @@
 import type {Account} from "~~/server/api/account";
 import type {PurchaseHistory} from "~~/server/api/PurchaseHistory";
 import type {Subscription} from "~~/server/api/Subscription";
+import {useApi} from "~/composable/useApi";
+import {$api} from "~/utils/api";
 
 const toast = useToast();
 
-const {data: user} = useFetch<Account>('http://localhost:8080/dashboard/account', {
+const {data: user} = useApi<Account>('/dashboard/account', {
   method: 'GET',
 });
 
@@ -14,7 +16,7 @@ let {
   data: subscription,
   pending,
   error
-} = useFetch<Subscription>('http://localhost:8080/dashboard/subscription', {
+} = useApi<Subscription>('/dashboard/subscription', {
   method: 'GET',
 });
 
@@ -41,7 +43,7 @@ const purchaseHistory: PurchaseHistory[] = [
 
 
 function cancelSubscription() {
-  $fetch<Subscription>('http://localhost:8080/dashboard/subscription/cancel', {
+  $api<Subscription>('/dashboard/subscription/cancel', {
     method: 'POST',
     onResponse: ({response, request, options}) => {
       if (response.status === 200) {
@@ -65,7 +67,8 @@ function cancelSubscription() {
     <div class="m-20 flex flex-row w-10/12 justify-between">
       <div>
         <h1 class="text-5xl mb-1">{{ subscription.seats == 1 ? 'Individual Licence' : 'Organization Licence' }}</h1>
-        <h2 class="text-xl text-muted font-light">Valid for all versions released before {{ new Date(subscription.end).toDateString() }}</h2>
+        <h2 class="text-xl text-muted font-light">Valid for all versions released before
+          {{ new Date(subscription.end).toDateString() }}</h2>
         <h2 class="text-xl text-muted font-light" v-if="subscription.seats > 1">{{ subscription.seats }} Seats</h2>
       </div>
       <div class="flex-grow"></div>

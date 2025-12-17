@@ -1,8 +1,10 @@
 <script setup lang="ts">
+
 definePageMeta({
   layout: 'header',
 });
 import {navigateTo} from "#app";
+import {$api} from "~/utils/api";
 
 let email = ref<string>('');
 let password = ref<string>('');
@@ -23,7 +25,8 @@ async function login(e: Event) {
   e.preventDefault();
   loading.value = true;
   error.value = '';
-  $fetch('http://localhost:8080/login', {
+
+  $api('login', {
     method: 'POST',
     body: {
       email: email.value,

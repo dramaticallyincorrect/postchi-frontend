@@ -3,15 +3,16 @@ import type {Licence} from "~~/server/api/licence";
 import * as v from "valibot";
 import type {FormSubmitEvent} from "@nuxt/ui";
 import {uniquesByKey} from "~/utils/list";
+import {useApi} from "~/composable/useApi";
 
 let toast = useToast();
 
-let {data: licences, pending, error, refresh} = useFetch<Licence[]>('http://localhost:8080/dashboard/licences', {
+let {data: licences, pending, error, refresh} = useApi<Licence[]>('/dashboard/licences', {
   method: 'GET',
 });
 
 function deleteLicence(licence: Licence, e: Event) {
-  $fetch(`http://localhost:8080/dashboard/licences/${licence.key}`, {
+  useApi(`/dashboard/licences/${licence.key}`, {
     method: 'DELETE',
     onResponse: ({response, request, options}) => {
       if (response.ok) {
@@ -43,7 +44,7 @@ const invitationState = reactive({
 
 async function inviteUser(event: FormSubmitEvent<Schema>) {
   if (invitationState.email) {
-    await $fetch<Licence | undefined>(`http://localhost:8080/dashboard/subscription/invite?email=${invitationState.email}`, {
+    await $api<Licence | undefined>(`/dashboard/subscription/invite?email=${invitationState.email}`, {
       method: 'POST',
       onResponse: async ({response, request, options}) => {
         if (response.ok) {

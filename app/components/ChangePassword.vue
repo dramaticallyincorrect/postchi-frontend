@@ -14,7 +14,7 @@ async function setPassword(e: Event) {
   e.preventDefault();
   loading.value = true;
   error.value = '';
-  $fetch('http://localhost:8080/dashboard/setPassword', {
+  $api('/dashboard/setPassword', {
     method: 'POST',
     body: {
       password: password.value
