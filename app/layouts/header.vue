@@ -1,27 +1,31 @@
 <script setup lang="ts">
 import type {NavigationMenuItem} from "@nuxt/ui/components/NavigationMenu.vue";
+import {docsUrl} from "~/utils/constants";
 
 const route = useRoute();
 
-const items = computed<NavigationMenuItem[]>(() => [{
-  label: 'Download',
-  to: '/pricing',
-  active: route.path.startsWith('/pricing')
-}, {
-  label: 'Login',
-  to: '/login',
-  active: route.path.startsWith('/login')
-}, {
-  label: 'Docs',
-  to: '/docs/getting-started',
-  active: route.path.startsWith('/docs/getting-started')
-},
-  {
-    label: 'Support',
-    to: '/support',
-    active: route.path.startsWith('/support')
-  }
-]);
+const items = computed<NavigationMenuItem[]>(() => {
+  return [{
+    label: 'Download',
+    to: '/pricing',
+    active: route.path.startsWith('/pricing')
+  }, {
+    label: 'Login',
+    to: '/login',
+    active: route.path.startsWith('/login')
+  }, {
+    label: 'Docs',
+    to: docsUrl,
+    target: '_blank',
+    active: route.fullPath == 'https://docs.getpostchi.com'
+  },
+    {
+      label: 'Support',
+      to: '/support',
+      active: route.path.startsWith('/support')
+    }
+  ];
+});
 
 </script>
 

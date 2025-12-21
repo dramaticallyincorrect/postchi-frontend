@@ -1,0 +1,1 @@
+export const docsUrl = 'https://docs.getpostchi.com'

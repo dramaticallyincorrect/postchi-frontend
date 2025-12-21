@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {definePageMeta} from "#imports";
+import {docsUrl} from "~/utils/constants";
 
 definePageMeta({layout: 'header'});
 
@@ -18,7 +19,7 @@ definePageMeta({layout: 'header'});
         <UIcon name="lucide:book-search" class="place-self-center m-6" size="64"></UIcon>
         <span class="text-3xl font-bold mb-2 text-highlighted">How can i ... ?</span>
         <span class="text-1xl">Learn about Postchi via documentation</span>
-        <ULink to="/docs" class="mt-6 text-secondary-800 dark:text-secondary-400">Open Documentation
+        <ULink :to=docsUrl target="_blank" class="mt-6 text-secondary-800 dark:text-secondary-400">Open Documentation
           <UIcon name="ic:round-navigate-next" class=" align-middle" size="24"></UIcon>
         </ULink>
       </div>
