@@ -70,6 +70,14 @@ const sections = ref([
         }
       },
       {
+        title: 'Active Devices',
+        tiers: {
+          free: 'N/A',
+          individual: 3,
+          teams: 3
+        }
+      },
+      {
         title: 'Http',
         tiers: {
           free: true,
