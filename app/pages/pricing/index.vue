@@ -54,11 +54,11 @@ const sections = ref([
     title: 'Features',
     features: [
       {
-        title: 'Updates',
+        title: 'Lifetime Fallback',
         tiers: {
-          free: 'only patches',
-          individual: '1 year',
-          teams: 'While subscribed'
+          free: 'N/A',
+          individual: true,
+          teams: false
         }
       },
       {
@@ -74,7 +74,7 @@ const sections = ref([
         tiers: {
           free: 'N/A',
           individual: 3,
-          teams: 3
+          teams: 2
         }
       },
       {
@@ -140,14 +140,6 @@ const sections = ref([
           individual: true,
           teams: true
         }
-      },
-      {
-        title: 'Roadmap Influence',
-        tiers: {
-          free: false,
-          individual: true,
-          teams: true
-        }
       }
     ]
   },
@@ -201,16 +193,16 @@ const sections = ref([
 
 const faq = ref([
   {
-    label: 'What does beta mean?',
-    content: 'To make sure Postchi is bug free we are releasing it in a beta state, currently we are at version 0.9 and although the app has been tested it has not been tested on a wide number of devices specially on windows and linux, this period gives us time to make sure we fix any remaining bugs before we go into version 1.0 most likely in february'
-  },
-  {
     label: 'Why some features are under Coming Soon?',
     content: 'These features such as websockets and graphql are not yet implemented but are planned and will be in later version of postchi, very soon!!'
   },
   {
     label: 'What happens when my subscription ends?',
     content: 'Individual licenses can keep using the last version that was released during the time of their subscription, Team licenses are only active while the subscription has not ended'
+  },
+  {
+    label: 'Lifetime Fallback',
+    content: 'Individual Licenses can always be used for versions released during the time of subscription even after subscription ends'
   },
 ])
 
