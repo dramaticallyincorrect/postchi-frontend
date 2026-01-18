@@ -56,9 +56,9 @@ const sections = ref([
       {
         title: 'Updates',
         tiers: {
-          free: false,
+          free: 'only patches',
           individual: '1 year',
-          teams: '1 year'
+          teams: 'While subscribed'
         }
       },
       {
@@ -96,15 +96,7 @@ const sections = ref([
       {
         title: 'Theme and Customization',
         tiers: {
-          free: false,
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Folder Configuration',
-        tiers: {
-          free: false,
+          free: true,
           individual: true,
           teams: true
         }
@@ -119,6 +111,14 @@ const sections = ref([
       },
       {
         title: 'Folder Scripts',
+        tiers: {
+          free: false,
+          individual: true,
+          teams: true
+        }
+      },
+      {
+        title: 'Folder Configuration',
         tiers: {
           free: false,
           individual: true,
@@ -149,7 +149,7 @@ const sections = ref([
       {
         title: 'Open Api Sync',
         tiers: {
-          free: false,
+          free: 'TBD',
           individual: true,
           teams: true
         }
@@ -157,7 +157,7 @@ const sections = ref([
       {
         title: 'Web Sockets',
         tiers: {
-          free: false,
+          free: 'TBD',
           individual: true,
           teams: true
         }
@@ -165,7 +165,7 @@ const sections = ref([
       {
         title: 'GraphQL',
         tiers: {
-          free: false,
+          free: 'TBD',
           individual: true,
           teams: true
         }
@@ -173,7 +173,7 @@ const sections = ref([
       {
         title: 'Functions',
         tiers: {
-          free: false,
+          free: 'TBD',
           individual: true,
           teams: true
         }
@@ -181,7 +181,7 @@ const sections = ref([
       {
         title: 'Advanced Scripting',
         tiers: {
-          free: false,
+          free: 'TBD',
           individual: true,
           teams: true
         }
@@ -202,7 +202,7 @@ const faq = ref([
   },
   {
     label: 'What happens when my subscription ends?',
-    content: 'You can keep using the last version that was released during the time of your subscription but updating to newer versions will require a subscription renewal'
+    content: 'Individual licenses can keep using the last version that was released during the time of their subscription, Team licenses are only active while the subscription has not ended'
   },
 ])
 
@@ -219,7 +219,7 @@ const faq = ref([
         class="mt-4 mb-10 max-w-6/12 place-self-center"
         variant="soft"
     />
-    <UPricingTable :tiers="tiers" :sections="sections" caption="captions sdfsdfsdf"/>
+    <UPricingTable :tiers="tiers" :sections="sections"/>
 
     <div class="mt-20 mb-20 ">
       <span class="text-6xl mb-4 block place-self-center">Frequently Asked Questions</span>

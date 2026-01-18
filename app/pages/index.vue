@@ -41,61 +41,40 @@ definePageMeta({
 
         </div>
 
-        <img src="/postchi.png" class="place-self-center mt-6 rounded-md mb-16" alt="postchi-screenshot">
+        <video controls src="/postchi_demo_1080.mp4" class="w-11/12 place-self-center mt-6 rounded-md mb-16">
+          <source src="/postchi_demo_1080.mp4" type="video/mp4">
+          Your browser does not support this video
+        </video>
 
         <div class="flex flex-row justify-evenly my-16">
-          <div class="flex flex-col">
-            <span class="text-6xl mb-4 font-bold text-brand">Intelligent</span>
-            <span class="text-toned text-3xl">Postchi provides immediate feedback for errors and auto complete</span>
+          <div class="flex flex-col mt-4 mr-4">
+            <span class="text-5xl mb-4 font-bold text-brand">Intelligent</span>
+            <span class="text-toned text-2xl">Postchi provides immediate feedback for errors and auto complete</span>
           </div>
-          <img
-              src="https://placehold.co/500x400"
-              alt="Illustration"
-              class="rounded-lg mx-10"
-          />
+          <video controls class="w-7/12 place-self-center mt-6 rounded-md ">
+            <source src="/intellisense_1080.mp4" type="video/mp4">
+            Your browser does not support this video
+          </video>
         </div>
 
         <div class="flex flex-row-reverse justify-evenly my-17">
           <div class="flex flex-col">
-            <span class="text-6xl mb-4 font-bold text-brand">Intuitive Environments</span>
+            <span class="text-6xl mt-4 font-bold text-brand">Intuitive Environments</span>
             <span
                 class="text-toned text-3xl">Define all environments in a single file with easy syntax and Intellisense</span>
           </div>
-          <img
-              src="https://placehold.co/500x400"
-              alt="Illustration"
-              class="rounded-lg mx-10"
-          />
+          <video controls class="w-7/12 place-self-center mt-6 rounded-md mx-10">
+            <source src="/environments.mp4" type="video/mp4">
+            Your browser does not support this video
+          </video>
         </div>
 
-        <div class="flex flex-row justify-evenly my-16">
-          <div class="flex flex-col">
-            <span class="text-6xl mb-4 font-bold text-brand">Folder Configuration</span>
-            <span class="text-toned text-3xl">Apply configuration to all or subset of collections like setting a base path</span>
-          </div>
-          <img
-              src="https://placehold.co/500x400"
-              alt="Illustration"
-              class="rounded-lg mx-10"
-          />
-        </div>
-
-        <div class="flex flex-row-reverse justify-evenly my-17">
-          <div class="flex flex-col">
-            <span class="text-6xl mb-4 font-bold text-brand">Scripts</span>
-            <span
-                class="text-toned text-3xl">Use folder or request before and after scripts to change a request or perform actions</span>
-          </div>
-          <img
-              src="https://placehold.co/500x400"
-              alt="Illustration"
-              class="rounded-lg mx-10"
-          />
-        </div>
-
-        <span class="place-self-center text-5xl my-4 py-4">
-          With many more to come!
+        <span class="place-self-center text-2xl my-4 py-4">
+          Download <b><em>Postchi</em></b> and checkout the <ULink to="https://docs.getpostchi.com">
+          docs
+        </ULink> to learn about more features like scripts and folder configurations
         </span>
+
 
         <UButton class="cursor-pointer place-self-center text-lg mb-36" color="primary" icon="i-lucide-download"
                  to="/pricing">
