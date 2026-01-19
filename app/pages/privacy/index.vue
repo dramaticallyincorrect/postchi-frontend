@@ -7,6 +7,7 @@ definePageMeta({
 <style>
 
 .privacy-policy-page .container {
+  background-color: white;
   max-width: 56rem;
   margin: 0 auto;
   padding: 3rem 1.5rem;

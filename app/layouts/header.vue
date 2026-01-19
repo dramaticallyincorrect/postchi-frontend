@@ -2,6 +2,7 @@
 import type {NavigationMenuItem} from "@nuxt/ui/components/NavigationMenu.vue";
 import {docsUrl} from "~/utils/constants";
 
+
 const route = useRoute();
 
 const items = computed<NavigationMenuItem[]>(() => {
@@ -26,6 +27,24 @@ const items = computed<NavigationMenuItem[]>(() => {
     }
   ];
 });
+
+const footers: NavigationMenuItem[] = [
+  {
+    label: 'Privacy Policy',
+    to: 'privacy',
+    target: '_blank'
+  },
+  {
+    label: 'Refund Policy',
+    to: 'refund',
+    target: '_blank'
+  },
+  {
+    label: 'terms and conditions',
+    to: 'terms',
+    target: '_blank'
+  }
+]
 
 </script>
 
@@ -56,4 +75,11 @@ const items = computed<NavigationMenuItem[]>(() => {
     </template>
   </UHeader>
   <slot></slot>
+  <UFooter class="mt-8">
+    <template #left>
+      <p class="text-muted text-sm">Copyright © Dramatically Incorrect {{ new Date().getFullYear() }}</p>
+    </template>
+
+    <UNavigationMenu :items="footers" variant="link"/>
+  </UFooter>
 </template>
