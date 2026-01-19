@@ -1,54 +1,15 @@
 <script setup lang="ts">
 import {navigateTo} from "#app";
+import {businessId, individualId} from "~/constants/prices";
+import {initializePaddle, type PricePreviewResponse} from '@paddle/paddle-js';
 
 definePageMeta({
   layout: 'header',
 });
 
+const loading = ref(true);
 
-const tiers = ref([
-  {
-    id: 'free',
-    title: 'Free',
-    price: '$0',
-    description: 'Try out postchi',
-    button: {
-      label: 'Download',
-      variant: 'outline',
-      onClick: () => {
-        navigateTo(`/download`);
-      }
-    }
-  },
-  {
-    id: 'individual',
-    title: 'Individual',
-    price: '$35',
-    description: 'For individuals',
-    billingCycle: '/year',
-    discount: '$25',
-    button: {
-      label: 'Buy now',
-      onClick: () => {
-        navigateTo(`/payment/billingInfo?type=pri_01kb3n17k8vzgy4vdafcxtanhx`);
-      }
-    }
-  },
-  {
-    id: 'teams',
-    title: 'Teams',
-    price: '$50',
-    discount: '$35',
-    description: 'For teams of any size',
-    billingCycle: '/year/user',
-    button: {
-      label: 'Buy Now',
-      onClick: () => {
-        navigateTo(`/payment/billingInfo?type=pri_01kb3n774k95ee7njf08n0exr9`);
-      }
-    }
-  }
-])
+const tiers = ref()
 const sections = ref([
   {
     title: 'Features',
@@ -206,19 +167,83 @@ const faq = ref([
   },
 ])
 
+const paddle = await initializePaddle({
+  environment: 'sandbox',
+  token: 'test_5ab60d9d332161a26e0cfe66605',
+});
+
+paddle?.PricePreview({
+  items: [
+    {
+      quantity: 1,
+      priceId: individualId,
+    },
+    {
+      quantity: 2,
+      priceId: businessId,
+    }
+  ]
+}).then((result: PricePreviewResponse) => {
+  let items = result.data.details.lineItems;
+  let individualTotal = items.find(value => value.price.id == individualId)?.formattedUnitTotals.total;
+  let businessTotal = items.find(value => value.price.id == businessId)?.formattedUnitTotals.total;
+
+  let currency = individualTotal?.charAt(0)
+
+      tiers.value = [
+    {
+      id: 'free',
+      title: 'Free',
+      price: `${currency}0`,
+      description: 'Try out postchi',
+      button: {
+        label: 'Download',
+        variant: 'outline',
+        onClick: () => {
+          navigateTo(`/download`);
+        }
+      }
+    },
+    {
+      id: 'individual',
+      title: 'Individual',
+      price: individualTotal,
+      description: 'For individuals',
+      billingCycle: '/year',
+      button: {
+        label: 'Buy now',
+        onClick: () => {
+          navigateTo(`/payment/billingInfo?type=pri_01kb3n17k8vzgy4vdafcxtanhx`);
+        }
+      }
+    },
+    {
+      id: 'teams',
+      title: 'Teams',
+      price: businessTotal,
+      description: 'For teams of any size',
+      billingCycle: '/year/user',
+      button: {
+        label: 'Buy Now',
+        onClick: () => {
+          navigateTo(`/payment/billingInfo?type=pri_01kb3n774k95ee7njf08n0exr9`);
+        }
+      }
+    }
+  ];
+
+  loading.value = false;
+  console.log(result);
+})
+    .catch((error) => {
+      console.error(error);
+    });
+
 </script>
 
 
 <template>
-  <UPage class="mt-6 flex flex-col w-10/12 place-self-center max-w-7xl">
-    <UAlert
-        color="neutral"
-        title="Postchi is in beta (testing) until february"
-        description="While in beta there is a $10 discount, support the development of postchi by purchasing a licence"
-        icon="i-lucide-terminal"
-        class="mt-4 mb-10 max-w-6/12 place-self-center"
-        variant="soft"
-    />
+  <UPage class="mt-6 flex flex-col w-10/12 place-self-center max-w-7xl" v-if="!loading">
     <UPricingTable :tiers="tiers" :sections="sections"/>
 
     <div class="mt-20 mb-20 ">
