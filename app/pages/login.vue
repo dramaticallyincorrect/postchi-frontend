@@ -49,40 +49,41 @@ async function login(e: Event) {
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <img class="mx-auto h-10 w-auto"
            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"/>
-      <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Sign in to your account</h2>
+      <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-slate-900 dark:text-white">Sign in to your account</h2>
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <form class="space-y-6" action="#" method="POST">
         <div>
-          <label for="email" class="block text-sm/6 font-medium text-gray-100">Email address</label>
+          <label for="email" class="block text-sm/6 font-medium text-slate-700 dark:text-slate-200">Email address</label>
           <div class="mt-2">
             <input v-model="email" type="email" name="email" id="email" autocomplete="email" required
-                   class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"/>
+                   class="block w-full rounded-md bg-white dark:bg-white/5 px-3 py-1.5 text-base text-slate-900 dark:text-white outline-1 -outline-offset-1 outline-slate-300 dark:outline-white/10 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:focus:outline-indigo-500 sm:text-sm/6 shadow-sm"/>
           </div>
         </div>
 
         <div>
           <div class="flex items-center justify-between">
-            <label for="password" class="block text-sm/6 font-medium text-gray-100">Password</label>
+            <label for="password" class="block text-sm/6 font-medium text-slate-700 dark:text-slate-200">Password</label>
             <div class="text-sm">
-              <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
+              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">Forgot password?</a>
             </div>
           </div>
           <div class="mt-2">
             <input v-model="password" type="password" name="password" id="password" autocomplete="current-password"
                    required
-                   class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"/>
+                   class="block w-full rounded-md bg-white dark:bg-white/5 px-3 py-1.5 text-base text-slate-900 dark:text-white outline-1 -outline-offset-1 outline-slate-300 dark:outline-white/10 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:focus:outline-indigo-500 sm:text-sm/6 shadow-sm"/>
           </div>
         </div>
 
         <div>
           <button v-on:click="login" type="submit"
-                  class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                  class="flex w-full justify-center rounded-md bg-indigo-600 dark:bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 dark:hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors">
             Sign in
           </button>
         </div>
-        <span class="text-error text-lg">{{ error }}</span>
+
+        <span class="text-red-600 dark:text-red-400 text-lg block text-center">{{ error }}</span>
       </form>
     </div>
   </div>
