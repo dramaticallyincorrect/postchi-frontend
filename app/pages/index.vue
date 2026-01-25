@@ -43,7 +43,7 @@ definePageMeta({
           </div>
         </section>
 
-        <div class="max-w-7xl mx-auto px-6 py-12 space-y-32 text-slate-900 dark:text-slate-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <UPageFeature
                 title="Clear"
@@ -65,50 +65,88 @@ definePageMeta({
             />
           </div>
 
-          <section class="flex flex-col md:flex-row items-center gap-16">
-            <div class="flex-1 space-y-4">
-              <h3 class="text-4xl font-bold">Intelligent Feedback</h3>
-              <p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
-                Postchi provides immediate feedback for errors and intelligent auto-complete for headers, variables, and
-                methods.
-              </p>
-            </div>
+          <div class="space-y-20 mt-16">
+
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div class="space-y-6">
+                <span class="text-amber-500 font-mono text-sm tracking-widest uppercase font-bold">Intellisense</span>
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Intelligent Feedback</h3>
+                <p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Postchi provides <span
+                    class="text-slate-900 dark:text-white font-semibold">context-aware suggestions</span> and errors to
+                  help you along the way.
+                </p>
+                <ul class="space-y-3">
+                  <li class="flex items-center gap-3 text-slate-500">
+                    <UIcon name="i-heroicons-check-circle" class="text-green-500"/>
+                    Auto-complete for standard headers
+                  </li>
+                  <li class="flex items-center gap-3 text-slate-500">
+                    <UIcon name="i-heroicons-check-circle" class="text-green-500"/>
+                    Real-time environment variable validation
+                  </li>
+                </ul>
+              </div>
+              <div class="relative">
+                <div
+                    class="absolute -inset-4 bg-linear-to-tr from-amber-500/10 to-transparent blur-2xl rounded-[2rem]"></div>
+                <div class="lg:order-1 relative">
+                  <div
+                      class="absolute -inset-4 bg-linear-to-tl from-blue-500/10 to-transparent blur-2xl rounded-[2rem]"></div>
+                  <div
+                      class="relative rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-2xl bg-black">
+                    <video controls class="w-full">
+                      <source src="/intellisense_1080.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div class="lg:order-2 space-y-6">
+                <span class="text-blue-500 font-mono text-sm tracking-widest uppercase font-bold">Simple</span>
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Intuitive Environments</h3>
+                <p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Forget deep-nested menus. Define your dev, staging, and prod environments in a <span
+                    class="text-slate-900 dark:text-white font-semibold">single env file</span>.
+                </p>
+              </div>
+              <div class="lg:order-1 relative">
+                <div
+                    class="absolute -inset-4 bg-gradient-to-tl from-blue-500/10 to-transparent blur-2xl rounded-[2rem]"></div>
+                <div
+                    class="relative rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-2xl bg-black">
+                  <video controls class="w-full">
+                    <source src="/environments.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <section class="relative z-10 pt-32 pb-24 text-center overflow-hidden">
             <div
-                class="flex-1 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-lg bg-white dark:bg-black">
-              <video controls class="w-full block">
-                <source src="/intellisense_1080.mp4" type="video/mp4">
-              </video>
+                class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-[radial-gradient(circle_at_50%_100%,_rgba(245,158,11,0.08)_0%,_transparent_50%)]"></div>
+
+            <div class="relative z-10">
+              <h2 class="text-4xl md:text-7xl font-black tracking-tight mb-6 bg-gradient-to-b from-slate-900 to-slate-500 dark:from-white dark:to-slate-400 bg-clip-text text-transparent">
+                More Coming Soon<br/>
+              </h2>
+
+              <div class="flex flex-col items-center gap-6">
+                <UButton size="xl" color="primary" variant="outline"
+                         class="rounded-full px-8 font-bold shadow-xl shadow-amber-500/10" to="pricing">
+                  <span class="text-green-600">GET</span> /postchi
+                </UButton>
+
+                <p class="text-xs font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">
+                  Available for macOS, Windows, and Linux
+                </p>
+              </div>
             </div>
           </section>
-
-          <section class="flex flex-col md:flex-row-reverse items-center gap-16">
-            <div class="flex-1 space-y-4">
-              <h3 class="text-4xl font-bold">Intuitive Environments</h3>
-              <p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
-                Define all environments in a single file with simple syntax.
-              </p>
-            </div>
-            <div
-                class="flex-1 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-lg bg-white dark:bg-black">
-              <video controls class="w-full block">
-                <source src="/environments.mp4" type="video/mp4">
-              </video>
-            </div>
-          </section>
-
-          <footer
-              class="flex flex-col items-center py-20 bg-slate-50 dark:bg-amber-400/5 rounded-3xl border border-slate-200 dark:border-amber-400/10 text-center space-y-8">
-            <div class="space-y-2">
-              <p class="">Download Postchi today and experience the power of a text-first API client.</p>
-            </div>
-            <div class="flex flex-col items-center gap-4">
-              <UButton size="xl" color="primary" variant="outline"
-                       class="rounded-full px-8 font-bold shadow-xl shadow-amber-500/10 mb-24" to="pricing">
-                <span class="text-green-600">GET</span> /postchi
-              </UButton>
-
-            </div>
-          </footer>
         </div>
       </div>
     </UPage>
