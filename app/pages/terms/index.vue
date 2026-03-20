@@ -26,12 +26,12 @@ definePageMeta({
         <p class="leading-relaxed mb-4">The App is available under the following license types:</p>
 
         <div class="ml-4 space-y-6">
-          <div class="border-l-4 border-primary/50 pl-4">
+          <div class="border-l-4 border-success/50 pl-4">
             <h3 class="text-lg font-semibold mb-2">2.1 Free Version</h3>
             <p class="leading-relaxed">The free version provides basic functionality at no cost. We reserve the right to modify or discontinue the free version at any time.</p>
           </div>
 
-          <div class="border-l-4 border-primary/50 pl-4">
+          <div class="border-l-4 border-success/50 pl-4">
             <h3 class="text-lg font-semibold mb-2">2.2 Individual License</h3>
             <p class="leading-relaxed mb-2">The Individual License is valid for one (1) year from the date of purchase and includes:</p>
             <ul class="list-disc ml-6 mt-2 space-y-1">
@@ -43,7 +43,7 @@ definePageMeta({
             <p class="leading-relaxed mt-3">After the subscription expires, you may continue to use versions of the App that were released during your active subscription period, but you will not receive new updates or access to versions released after expiration.</p>
           </div>
 
-          <div class="border-l-4 border-primary/50 pl-4">
+          <div class="border-l-4 border-success/50 pl-4">
             <h3 class="text-lg font-semibold mb-2">2.3 Team License</h3>
             <p class="leading-relaxed mb-2">The Team License is valid for one (1) year from the date of purchase and includes:</p>
             <ul class="list-disc ml-6 mt-2 space-y-1">

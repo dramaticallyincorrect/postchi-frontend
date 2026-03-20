@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=JetBrains Mono");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "@nuxt/ui";
 
@@ -11,7 +11,9 @@
 }
 
 @theme {
-    --color-brand: #ffb325;
+    --color-brand: #ff0000;
+    --color-primary: #ff0000;
+    --color-onprimary: #ffffff;
     --color-onbrand: #ffffff;
     --color-brand-strong: #d38900;
 

@@ -25,7 +25,7 @@ definePageMeta({
 
       <section>
         <h2 class="text-2xl font-semibold mb-4">2. 30-Day Money-Back Guarantee</h2>
-        <div class="bg-primary/10 border-l-4 border-primary p-4 my-4 rounded">
+        <div class="bg-success/10 border-l-4 border-success p-4 my-4 rounded">
           <p class="leading-relaxed"><strong>We offer a 30-day money-back guarantee on all paid licenses.</strong> If
             you are not satisfied with Postchi for any reason, you may request a full refund within 30 days of your
             original purchase date.</p>
@@ -48,7 +48,7 @@ definePageMeta({
         <h2 class="text-2xl font-semibold mb-4">4. Refund Process by License Type</h2>
 
         <div class="ml-4 space-y-6">
-          <div class="border-l-4 border-primary/50 pl-4">
+          <div class="border-l-4 border-success/50 pl-4">
             <h3 class="text-lg font-semibold mb-2">4.1 Individual License Refunds</h3>
             <p class="leading-relaxed mb-2">If you request a refund for an Individual License within the 30-day
               period:</p>
@@ -60,7 +60,7 @@ definePageMeta({
             </ul>
           </div>
 
-          <div class="border-l-4 border-primary/50 pl-4">
+          <div class="border-l-4 border-success/50 pl-4">
             <h3 class="text-lg font-semibold mb-2">4.2 Team License Refunds</h3>
             <p class="leading-relaxed mb-2">If you request a refund for a Team License within the 30-day period:</p>
             <ul class="list-disc ml-6 mt-2 space-y-1">
@@ -143,8 +143,8 @@ definePageMeta({
         <h2 class="text-2xl font-semibold mb-4">11. Contact Information</h2>
         <p class="leading-relaxed">If you have any questions about this Refund Policy or need to request a refund,
           please contact us at:</p>
-        <div class="mt-3 p-4 bg-primary/5 rounded border border-primary/20">
-          <p><strong>Email:</strong> support@getpostchi.get</p>
+        <div class="mt-3 p-4 bg-success/5 rounded border border-success/20">
+          <p><strong>Email:</strong> support@getpostchi.com</p>
           <p><strong>Subject Line:</strong> Refund Request</p>
           <p><strong>Response Time:</strong> Within 3 business days</p>
         </div>

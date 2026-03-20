@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type {NavigationMenuItem} from "@nuxt/ui/components/NavigationMenu.vue";
+
 import {docsUrl} from "~/utils/constants";
 
 
 const route = useRoute();
 
-const items = computed<NavigationMenuItem[]>(() => {
+const items = computed(() => {
   return [{
     label: '~/Download',
     to: '/pricing',
@@ -28,7 +28,7 @@ const items = computed<NavigationMenuItem[]>(() => {
   ];
 });
 
-const footers: NavigationMenuItem[] = [
+const footers = [
   {
     label: 'Privacy Policy',
     to: 'privacy',
@@ -53,12 +53,10 @@ const footers: NavigationMenuItem[] = [
     <nav
         class="border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between bg-white/50 dark:bg-[#0b0e14]/50 backdrop-blur-md sticky top-0 z-50">
       <div class="flex items-center gap-6">
-        <div class="flex items-center gap-2">
-          <div class="w-6 h-6 bg-amber-500 rounded flex items-center justify-center">
-            <UIcon name="i-lucide-code" class="text-white text-xs"/>
-          </div>
+        <div class="flex flex-row items-center gap-2">
           <ULink to="/">
-            <span class="font-bold tracking-tighter dark:text-white">POSTCHI.exe</span>
+            <img src="/postchi.svg" alt="Postchi Logo" class="h-12 absolute left-0 top-1 inline"/>
+            <span class="ml-8">Postchi</span>
           </ULink>
         </div>
       </div>

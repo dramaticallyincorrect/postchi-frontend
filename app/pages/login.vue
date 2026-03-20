@@ -11,16 +11,6 @@ let password = ref<string>('');
 let loading = ref<boolean>(false);
 let error = ref<string>();
 
-useHead({
-  bodyAttrs: {
-    class: 'h-full',
-  },
-  htmlAttrs: {
-    class: 'h-full bg-gray-900',
-  }
-});
-
-
 async function login(e: Event) {
   e.preventDefault();
   loading.value = true;
@@ -45,45 +35,32 @@ async function login(e: Event) {
 
 
 <template>
-  <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img class="mx-auto h-10 w-auto"
-           src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"/>
-      <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-slate-900 dark:text-white">Sign in to your account</h2>
+  <div class="max-w-sm mx-auto px-6 py-24">
+    <div class="text-center mb-8">
+      <img class="mx-auto h-10 w-auto mb-6" src="/postchi.svg" alt="Postchi"/>
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">Sign in to your account</h2>
     </div>
 
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="#" method="POST">
+    <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm p-8">
+      <form class="space-y-6" @submit="login">
         <div>
-          <label for="email" class="block text-sm/6 font-medium text-slate-700 dark:text-slate-200">Email address</label>
-          <div class="mt-2">
-            <input v-model="email" type="email" name="email" id="email" autocomplete="email" required
-                   class="block w-full rounded-md bg-white dark:bg-white/5 px-3 py-1.5 text-base text-slate-900 dark:text-white outline-1 -outline-offset-1 outline-slate-300 dark:outline-white/10 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:focus:outline-indigo-500 sm:text-sm/6 shadow-sm"/>
-          </div>
+          <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Email address</label>
+          <UInput v-model="email" type="email" id="email" autocomplete="email" required placeholder="you@example.com" size="lg" class="w-full"/>
         </div>
 
         <div>
-          <div class="flex items-center justify-between">
-            <label for="password" class="block text-sm/6 font-medium text-slate-700 dark:text-slate-200">Password</label>
-            <div class="text-sm">
-              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">Forgot password?</a>
-            </div>
+          <div class="flex items-center justify-between mb-2">
+            <label for="password" class="block text-sm font-medium text-slate-700 dark:text-slate-200">Password</label>
+            <a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 dark:text-amber-400 dark:hover:text-amber-300">Forgot password?</a>
           </div>
-          <div class="mt-2">
-            <input v-model="password" type="password" name="password" id="password" autocomplete="current-password"
-                   required
-                   class="block w-full rounded-md bg-white dark:bg-white/5 px-3 py-1.5 text-base text-slate-900 dark:text-white outline-1 -outline-offset-1 outline-slate-300 dark:outline-white/10 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:focus:outline-indigo-500 sm:text-sm/6 shadow-sm"/>
-          </div>
+          <UInput v-model="password" type="password" id="password" autocomplete="current-password" required size="lg" class="w-full"/>
         </div>
 
-        <div>
-          <button v-on:click="login" type="submit"
-                  class="flex w-full justify-center rounded-md bg-indigo-600 dark:bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 dark:hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors">
-            Sign in
-          </button>
-        </div>
+        <UButton type="submit" :loading="loading" block size="lg" color="amber" class="font-semibold">
+          Sign in
+        </UButton>
 
-        <span class="text-red-600 dark:text-red-400 text-lg block text-center">{{ error }}</span>
+        <span v-if="error" class="text-red-600 dark:text-red-400 text-sm block text-center">{{ error }}</span>
       </form>
     </div>
   </div>
