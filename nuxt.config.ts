@@ -3,16 +3,27 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
     compatibilityDate: '2025-07-15',
-    devtools: {enabled: true},
+    devtools: { enabled: true },
+    app: {
+        head: {
+            title: 'Postchi', // default fallback title
+            htmlAttrs: {
+                lang: 'en',
+            },
+            link: [
+                { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            ],
+        },
+    },
     runtimeConfig: {
         public: {
             postchiApi: ''
         }
     },
     routeRules: {
-        '/dashboard': {ssr: false},
-        '/dashboard/**': {ssr: false},
-        '/otp': {ssr: false},
+        '/dashboard': { ssr: false },
+        '/dashboard/**': { ssr: false },
+        '/otp': { ssr: false },
     },
     vite: {
         plugins: [
@@ -29,5 +40,5 @@ export default defineNuxtConfig({
                 file: '~/pages/dashboard/licence.vue'
             })
         }
-    }
+    },
 })

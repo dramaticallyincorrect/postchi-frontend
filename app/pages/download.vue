@@ -38,7 +38,27 @@ onMounted(async () => {
   detectedOS.value = detectOS()
 
   try {
-    assets.value = await $fetch<DownloadAssets>('/api/releases')
+    const release = await $fetch<{ tag_name: string }>(
+      'https://api.github.com/repos/dramaticallyincorrect/Postchi/releases/latest'
+    )
+    const v = release.tag_name.replace(/^v/, '')
+    const base = `https://github.com/dramaticallyincorrect/Postchi/releases/download/v${v}`
+
+    assets.value = {
+      mac: {
+        arm: `${base}/postchi_${v}_aarch64.dmg`,
+        intel: `${base}/postchi_${v}_x64.dmg`,
+      },
+      windows: {
+        exe: `${base}/postchi_${v}_x64-setup.exe`,
+        msi: `${base}/postchi_${v}_x64_en-US.msi`,
+      },
+      linux: {
+        appimage: `${base}/postchi_${v}_amd64.AppImage`,
+        deb: `${base}/postchi_${v}_amd64.deb`,
+        rpm: `${base}/postchi-${v}-1.x86_64.rpm`,
+      },
+    }
 
     if (detectedOS.value === 'mac' && assets.value.mac.arm) {
       triggerDownload(assets.value.mac.arm)
