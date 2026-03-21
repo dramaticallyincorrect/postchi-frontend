@@ -56,7 +56,7 @@ function copyLicence(licence: Licence, e: Event) {
       </div>
     </div>
     <div class="flex-grow"></div>
-    <UButton class="cursor-pointer place-self-end text-lg" color="primary" icon="i-lucide-download">Download Postchi
+    <UButton class="cursor-pointer place-self-end text-lg" color="primary" icon="i-lucide-download" to="/download">Download Postchi
     </UButton>
   </div>
 </template>

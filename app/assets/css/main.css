@@ -4,6 +4,7 @@
 
 :root {
     --ui-bg: #F5F5F4;
+    --ui-text-inverted: #ffffff;
 }
 
 .dark {
