@@ -1,9 +1,14 @@
 <script setup lang="ts">
+import { usePaddlePrices } from '~/composables/usePaddlePrices';
+
 
 definePageMeta({
   layout: 'header',
 });
 
+// Prefetch Paddle prices in the background so the pricing page loads instantly
+const { fetchPrices } = usePaddlePrices()
+onMounted(() => { fetchPrices() })
 
 </script>
 

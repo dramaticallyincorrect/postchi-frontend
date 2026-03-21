@@ -1,15 +1,58 @@
 <script setup lang="ts">
 import {navigateTo} from "#app";
-import {businessId, individualId} from "~/constants/prices";
-import {initializePaddle, type PricePreviewResponse} from '@paddle/paddle-js';
+import { usePaddlePrices } from "~/composables/usePaddlePrices";
 
 definePageMeta({
   layout: 'header',
 });
 
-const loading = ref(true);
+const { prices, isFetching, fetchPrices } = usePaddlePrices()
 
-const tiers = ref()
+// Fetch prices if not already cached (e.g. user landed directly on this page)
+onMounted(() => { fetchPrices() })
+
+const loading = computed(() => prices.value === null)
+
+const tiers = computed(() => {
+  const p = prices.value
+  if (!p) return undefined
+  return [
+    {
+      id: 'free',
+      title: 'Free',
+      price: `${p.currency}0`,
+      description: 'Try out postchi',
+      button: {
+        label: 'Download',
+        variant: 'outline' as const,
+        onClick: () => { navigateTo('/download') }
+      }
+    },
+    {
+      id: 'individual',
+      title: 'Individual',
+      price: p.individualTotal,
+      description: 'For individuals',
+      billingCycle: '/year',
+      button: {
+        label: 'Buy now',
+        onClick: () => { navigateTo('/payment/billingInfo?type=pri_01kb3n17k8vzgy4vdafcxtanhx') }
+      }
+    },
+    {
+      id: 'teams',
+      title: 'Teams',
+      price: p.businessTotal,
+      description: 'For teams of any size',
+      billingCycle: '/year/user',
+      button: {
+        label: 'Buy Now',
+        onClick: () => { navigateTo('/payment/billingInfo?type=pri_01kb3n774k95ee7njf08n0exr9') }
+      }
+    }
+  ]
+})
+
 const sections = ref([
   {
     title: 'Features',
@@ -167,84 +210,13 @@ const faq = ref([
   },
 ])
 
-const paddle = await initializePaddle({
-  environment: 'sandbox',
-  token: 'test_5ab60d9d332161a26e0cfe66605',
-});
-
-paddle?.PricePreview({
-  items: [
-    {
-      quantity: 1,
-      priceId: individualId,
-    },
-    {
-      quantity: 2,
-      priceId: businessId,
-    }
-  ]
-}).then((result: PricePreviewResponse) => {
-  let items = result.data.details.lineItems;
-  let individualTotal = items.find(value => value.price.id == individualId)?.formattedUnitTotals.total;
-  let businessTotal = items.find(value => value.price.id == businessId)?.formattedUnitTotals.total;
-
-  let currency = individualTotal?.charAt(0)
-
-      tiers.value = [
-    {
-      id: 'free',
-      title: 'Free',
-      price: `${currency}0`,
-      description: 'Try out postchi',
-      button: {
-        label: 'Download',
-        variant: 'outline',
-        onClick: () => {
-          navigateTo(`/download`);
-        }
-      }
-    },
-    {
-      id: 'individual',
-      title: 'Individual',
-      price: individualTotal,
-      description: 'For individuals',
-      billingCycle: '/year',
-      button: {
-        label: 'Buy now',
-        onClick: () => {
-          navigateTo(`/payment/billingInfo?type=pri_01kb3n17k8vzgy4vdafcxtanhx`);
-        }
-      }
-    },
-    {
-      id: 'teams',
-      title: 'Teams',
-      price: businessTotal,
-      description: 'For teams of any size',
-      billingCycle: '/year/user',
-      button: {
-        label: 'Buy Now',
-        onClick: () => {
-          navigateTo(`/payment/billingInfo?type=pri_01kb3n774k95ee7njf08n0exr9`);
-        }
-      }
-    }
-  ];
-
-  loading.value = false;
-  console.log(result);
-})
-    .catch((error) => {
-      console.error(error);
-    });
 
 </script>
 
 
 <template>
   <UPage class="mt-6 flex flex-col w-10/12 place-self-center max-w-7xl" v-if="!loading">
-    <UPricingTable :tiers="tiers" :sections="sections"/>
+    <UPricingTable :tiers="tiers ?? []" :sections="sections"/>
 
     <div class="mt-20 mb-20 ">
       <span class="text-6xl mb-4 block place-self-center">Frequently Asked Questions</span>
