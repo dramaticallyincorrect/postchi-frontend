@@ -20,7 +20,7 @@ const schema = v.object({
   email: v.pipe(v.string(), v.union([
     v.literal(''),
     v.pipe(
-        v.string(), // Re-validate it's a string (necessary when using union with literal)
+        v.string(),
         v.email('Please enter a valid email address.')
     )
   ])),
@@ -48,48 +48,67 @@ async function inviteUser(event: FormSubmitEvent<Schema>) {
       })
   }
 }
-
-
 </script>
 
 <template>
-  <UContainer>
-    <UForm :validate-on="[]" :schema="schema" :state="invitationState" @submit="inviteUser"
-           class="m-4 flex flex-row justify-end">
-      <UFormField name="email">
-        <UInput required placeholder="User email" v-model="invitationState.email" type="email" class="w-64"/>
-      </UFormField>
-      <UButton type="submit" class="h-8 ml-2">
-        Send Invitation
-      </UButton>
-    </UForm>
-  </UContainer>
-  <table class="w-full">
-    <tr class="flex flex-row text-muted">
-      <th class="flex-2" scope="colgroup">Email</th>
-      <th class="flex-2" scope="colgroup">Licence</th>
-      <th class="flex-1" scope="colgroup">Creation Date</th>
-      <th class="flex-1" scope="colgroup">Activation Status</th>
-      <th class="flex-1" scope="colgroup">Delete</th>
-    </tr>
-    <USeparator class="my-2"/>
-    <div v-for="licence in licences">
-      <tr class="flex flex-row text-default">
-        <th class="flex-2">{{ licence.email }}</th>
-        <th class="flex-2 uppercase font-mono">{{ licence.key }}</th>
-        <th class="flex-1">{{ licence.creationDate }}</th>
-        <th class="flex-1">{{ licence.activated ? 'Activated' : 'Pending' }}</th>
-        <th class="flex-1">
-          <UIcon v-on:click="deleteLicence(licence,$event)" name="material-symbols:delete"
-                 class="size-5 cursor-pointer"/>
-        </th>
-      </tr>
-      <USeparator class="my-2"/>
+  <div class="flex flex-col gap-6 px-8 py-8 w-full">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-semibold">Licences</h1>
+        <p class="text-sm text-muted mt-0.5">Manage seats and send invitations to your team.</p>
+      </div>
+      <UForm :validate-on="[]" :schema="schema" :state="invitationState" @submit="inviteUser" class="flex flex-row items-start gap-2">
+        <UFormField name="email">
+          <UInput required placeholder="User email" v-model="invitationState.email" type="email" class="w-64"/>
+        </UFormField>
+        <UButton type="submit" color="secondary">Send Invitation</UButton>
+      </UForm>
     </div>
 
-  </table>
+    <div v-if="pending" class="flex items-center justify-center h-40">
+      <UIcon name="i-lucide-loader-circle" class="size-6 animate-spin text-muted" />
+    </div>
+
+    <div v-else class="border border-default rounded-lg overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-default bg-elevated">
+            <th class="text-left px-4 py-3 text-muted font-medium w-[28%]">Email</th>
+            <th class="text-left px-4 py-3 text-muted font-medium w-[32%]">Licence Key</th>
+            <th class="text-left px-4 py-3 text-muted font-medium w-[15%]">Created</th>
+            <th class="text-left px-4 py-3 text-muted font-medium w-[15%]">Status</th>
+            <th class="text-left px-4 py-3 text-muted font-medium w-[10%]">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="licence in licences"
+            :key="licence.key"
+            class="border-b border-default last:border-b-0 hover:bg-elevated"
+          >
+            <td class="px-4 py-3">{{ licence.email }}</td>
+            <td class="px-4 py-3 font-mono text-xs uppercase tracking-widest">{{ licence.key }}</td>
+            <td class="px-4 py-3 text-muted">{{ licence.creationDate }}</td>
+            <td class="px-4 py-3">
+              <UBadge :color="licence.activated ? 'success' : 'warning'" variant="subtle" size="sm">
+                {{ licence.activated ? 'Activated' : 'Pending' }}
+              </UBadge>
+            </td>
+            <td class="px-4 py-3">
+              <button
+                v-on:click="deleteLicence(licence, $event)"
+                class="text-muted hover:text-error transition-colors"
+                title="Delete licence"
+              >
+                <UIcon name="i-lucide-trash-2" class="size-4" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div v-if="!licences || licences.length === 0" class="px-4 py-8 text-center text-muted text-sm">
+        No licences yet. Send an invitation to add team members.
+      </div>
+    </div>
+  </div>
 </template>
-
-<style scoped>
-
-</style>

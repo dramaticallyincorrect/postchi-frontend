@@ -8,12 +8,8 @@ const { data: user } = useFetch<Account>('/dashboard/account', { $fetch: $api })
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-row  w-full">
-    <div class="grow">
-      <LicenceDashboard v-if="user?.type == AccountType.Organisation"/>
-      <div class="flex flex-row h-full">
-        <IndividualLicence v-if="user?.type == AccountType.Individual" class="content-center grow"/>
-      </div>
-    </div>
+  <div class="flex flex-col flex-1 w-full">
+    <LicenceDashboard v-if="user?.type == AccountType.Organisation" />
+    <IndividualLicence v-if="user?.type == AccountType.Individual" />
   </div>
 </template>

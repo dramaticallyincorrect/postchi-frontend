@@ -52,45 +52,74 @@ function cancelSubscription() {
 
 
 <template>
-  <div class="flex flex-col w-full" v-if="subscription != null">
-    <div class="m-20 flex flex-row w-10/12 justify-between">
-      <div>
-        <h1 class="text-5xl mb-1">{{ subscription.seats == 1 ? 'Individual Licence' : 'Organization Licence' }}</h1>
-        <h2 class="text-xl text-muted font-light">Valid for all versions released before
-          {{ new Date(subscription.end).toDateString() }}</h2>
-        <h2 class="text-xl text-muted font-light" v-if="subscription.seats > 1">{{ subscription.seats }} Seats</h2>
-      </div>
-      <div class="flex-grow"></div>
-      <UButton v-on:click="cancelSubscription" v-if="subscription.status == 'active'" class="h-[42px]" color="neutral"
-               variant="outline">Cancel
-        Subscription
-      </UButton>
-      <span v-if="subscription.status != 'active'" class="text-lg">Subscription Cancelled</span>
+  <div class="flex flex-col w-full px-8 py-8">
+    <div v-if="pending" class="flex items-center justify-center h-64">
+      <UIcon name="i-lucide-loader-circle" class="size-8 animate-spin text-muted" />
     </div>
-    <USeparator/>
-    <div class="mx-20">
-      <h3 class="text-3xl mt-6 mb-10">Purchase History</h3>
-      <table class="w-full">
-        <tr class="flex flex-row text-muted mb-4">
-          <th class="flex-1" scope="colgroup">ID</th>
-          <th class="flex-2" scope="colgroup">Date</th>
-          <th class="flex-2" scope="colgroup">Amount</th>
-        </tr>
-        <div class="border border-muted rounded-lg">
-          <div v-for="(purchase, index) in purchaseHistory" class="">
-            <tr class="flex flex-row text-default my-3">
-              <th class="flex-1" scope="colgroup">{{ purchase.id }}</th>
-              <th class="flex-2" scope="colgroup">
-                <NuxtTime :datetime="purchase.date" month="long" year="numeric" day="numeric"/>
-              </th>
-              <th class="flex-2" scope="colgroup">{{ purchase.currency }}{{ purchase.amount }}</th>
-            </tr>
-            <USeparator v-if="index != purchaseHistory.length - 1"/>
+
+    <div v-else-if="subscription" class="flex flex-col gap-8">
+      <div class="flex flex-row items-start justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <h1 class="text-3xl font-semibold">
+              {{ subscription.seats === 1 ? 'Individual Licence' : 'Organization Licence' }}
+            </h1>
+            <UBadge
+              :color="subscription.status === 'active' ? 'success' : 'neutral'"
+              variant="subtle"
+            >
+              {{ subscription.status === 'active' ? 'Active' : 'Cancelled' }}
+            </UBadge>
+          </div>
+          <p class="text-base text-muted" v-if="subscription.seats == 1">
+            Valid for all versions released before {{ new Date(subscription.end).toDateString() }}
+          </p>
+          <p v-if="subscription.seats > 1" class="text-base text-muted">
+            {{ subscription.seats }} Seats
+          </p>
+        </div>
+        <UButton
+          v-if="subscription.status === 'active'"
+          v-on:click="cancelSubscription"
+          color="neutral"
+          variant="outline"
+        >
+          Cancel Subscription
+        </UButton>
+      </div>
+
+      <USeparator />
+
+      <div class="hidden">
+        <h2 class="hiddentext-xl font-semibold mb-4">Purchase History</h2>
+        <div class="border border-default rounded-lg overflow-hidden">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-default bg-elevated">
+                <th class="text-left px-4 py-3 text-muted font-medium">ID</th>
+                <th class="text-left px-4 py-3 text-muted font-medium">Date</th>
+                <th class="text-left px-4 py-3 text-muted font-medium">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(purchase, index) in purchaseHistory"
+                :key="purchase.id + index"
+                class="border-b border-[var(--ui-border)] last:border-b-0"
+              >
+                <td class="px-4 py-3 font-mono text-xs text-muted">{{ purchase.id }}</td>
+                <td class="px-4 py-3">
+                  <NuxtTime :datetime="purchase.date" month="long" year="numeric" day="numeric" />
+                </td>
+                <td class="px-4 py-3 font-medium">{{ purchase.currency }}{{ purchase.amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div v-if="purchaseHistory.length === 0" class="px-4 py-8 text-center text-muted text-sm">
+            No purchase history yet.
           </div>
         </div>
-
-      </table>
+      </div>
     </div>
   </div>
-
 </template>
