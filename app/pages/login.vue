@@ -3,8 +3,6 @@
 definePageMeta({
   layout: 'header',
 });
-import {navigateTo} from "#app";
-import {$api} from "~/utils/api";
 
 let email = ref<string>('');
 let password = ref<string>('');
@@ -16,7 +14,7 @@ async function login(e: Event) {
   loading.value = true;
   error.value = '';
 
-  $api('login', {
+  $api<{ token: string }>('/login', {
     method: 'POST',
     body: {
       email: email.value,
@@ -25,7 +23,7 @@ async function login(e: Event) {
   }).then(data => {
     localStorage.setItem('token', data.token);
     navigateTo('/dashboard/licence')
-  }).catch(err => {
+  }).catch(() => {
     error.value = 'incorrect username or password';
   }).finally(() => {
     loading.value = false;
@@ -56,7 +54,7 @@ async function login(e: Event) {
           <UInput v-model="password" type="password" id="password" autocomplete="current-password" required size="lg" class="w-full"/>
         </div>
 
-        <UButton type="submit" :loading="loading" block size="lg" color="amber" class="font-semibold">
+        <UButton type="submit" :loading="loading" block size="lg" color="primary" class="font-semibold">
           Sign in
         </UButton>
 

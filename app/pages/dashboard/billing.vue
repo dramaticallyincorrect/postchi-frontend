@@ -3,22 +3,16 @@
 import type {Account} from "~~/server/api/account";
 import type {PurchaseHistory} from "~~/server/api/PurchaseHistory";
 import type {Subscription} from "~~/server/api/Subscription";
-import {useApi} from "~/composable/useApi";
-import {$api} from "~/utils/api";
 
 const toast = useToast();
 
-const {data: user} = useApi<Account>('/dashboard/account', {
-  method: 'GET',
-});
+const { data: user } = useFetch<Account>('/dashboard/account', { $fetch: $api });
 
-let {
+const {
   data: subscription,
   pending,
   error
-} = useApi<Subscription>('/dashboard/subscription', {
-  method: 'GET',
-});
+} = useFetch<Subscription>('/dashboard/subscription', { $fetch: $api });
 
 const purchaseHistory: PurchaseHistory[] = [
   {
@@ -43,20 +37,15 @@ const purchaseHistory: PurchaseHistory[] = [
 
 
 function cancelSubscription() {
-  $api<Subscription>('/dashboard/subscription/cancel', {
-    method: 'POST',
-    onResponse: ({response, request, options}) => {
-      if (response.status === 200) {
-        subscription.value = response._data as Subscription
-      } else {
-        toast.add({
-          title: 'There was an issue cancelling your subscription',
-          description: 'Please try again later',
-          color: 'error'
-        })
-      }
-    }
-  });
+  $api<Subscription>('/dashboard/subscription/cancel', { method: 'POST' })
+    .then(data => { subscription.value = data })
+    .catch(() => {
+      toast.add({
+        title: 'There was an issue cancelling your subscription',
+        description: 'Please try again later',
+        color: 'error'
+      })
+    })
 }
 
 </script>

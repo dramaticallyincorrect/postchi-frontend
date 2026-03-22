@@ -3,18 +3,14 @@
 import type {Licence} from "~~/server/api/licence";
 import {type Subscription} from "~~/server/api/Subscription";
 
-let {data: licences} = useApi<Licence[]>('dashboard/licences', {
-  method: 'GET',
-});
+const { data: licences } = useFetch<Licence[]>('/dashboard/licences', { $fetch: $api });
 
-let {
+const {
   data: subscription,
   pending,
   error,
   refresh
-} = useApi<Subscription>('/dashboard/subscription', {
-  method: 'GET',
-});
+} = useFetch<Subscription>('/dashboard/subscription', { $fetch: $api });
 
 let isCopied = ref(false);
 

@@ -3,27 +3,17 @@ import type {Licence} from "~~/server/api/licence";
 import * as v from "valibot";
 import type {FormSubmitEvent} from "@nuxt/ui";
 import {uniquesByKey} from "~/utils/list";
-import {useApi} from "~/composable/useApi";
 
 let toast = useToast();
 
-let {data: licences, pending, error, refresh} = useApi<Licence[]>('/dashboard/licences', {
-  method: 'GET',
-});
+let { data: licences, pending, error, refresh } = useFetch<Licence[]>('/dashboard/licences', { $fetch: $api });
 
 function deleteLicence(licence: Licence, e: Event) {
-  useApi(`/dashboard/licences/${licence.key}`, {
-    method: 'DELETE',
-    onResponse: ({response, request, options}) => {
-      if (response.ok) {
-        licences.value = licences.value?.filter((value) => value.key != licence.key)
-        toast.add({
-          title: 'Licence Deleted',
-          color: 'success'
-        });
-      }
-    }
-  });
+  $api(`/dashboard/licences/${licence.key}`, { method: 'DELETE' })
+    .then(() => {
+      licences.value = licences.value?.filter((value) => value.key != licence.key)
+      toast.add({ title: 'Licence Deleted', color: 'success' })
+    })
 }
 
 const schema = v.object({
@@ -44,34 +34,18 @@ const invitationState = reactive({
 
 async function inviteUser(event: FormSubmitEvent<Schema>) {
   if (invitationState.email) {
-    await $api<Licence | undefined>(`/dashboard/subscription/invite?email=${invitationState.email}`, {
-      method: 'POST',
-      onResponse: async ({response, request, options}) => {
-        if (response.ok) {
-          toast.add({
-            title: 'Invitation sent',
-            description: 'Licence has been generated',
-            color: 'success'
-          })
-          let licence = response._data as Licence;
-          licences.value = uniquesByKey(licences.value?.concat(licence) ?? [], 'key')
+    await $api<Licence>(`/dashboard/subscription/invite?email=${invitationState.email}`, { method: 'POST' })
+      .then(licence => {
+        licences.value = uniquesByKey(licences.value?.concat(licence) ?? [], 'key')
+        toast.add({ title: 'Invitation sent', description: 'Licence has been generated', color: 'success' })
+      })
+      .catch(err => {
+        if (err.response?.status === 409) {
+          toast.add({ title: 'User already has an activated licence', description: 'Delete active licence first', color: 'error' })
+        } else if (err.response?.status === 403) {
+          toast.add({ title: 'No seats available', description: 'Add more seats on the subscription page', color: 'error' })
         }
-
-        if (response.status == 409) {
-          toast.add({
-            title: 'user already has an activated licence',
-            description: 'Delete active licence first',
-            color: 'error'
-          })
-        } else if (response.status == 403) {
-          toast.add({
-            title: 'No seats available',
-            description: 'Add more seats on the subscription page',
-            color: 'error'
-          })
-        }
-      }
-    });
+      })
   }
 }
 

@@ -1,14 +1,19 @@
 export const $api = $fetch.create({
-    // 1. Set the Base URL from runtime config
-    onRequest({request, options}) {
-        const config = useRuntimeConfig();
-        options.baseURL = config.public.postchiApi;
+    baseURL: 'https://postchi-backend-s76aq.sevalla.app',
+    onRequest({ options, request }) {
+        const url = typeof request === 'string' ? request : request.url
+        if (url.startsWith('/dashboard') && import.meta.client) {
+            const token = localStorage.getItem('token')
+            if (token) {
+                options.headers.set('Authorization', `Bearer ${token}`)
+            }
+        }
     },
-
-    onResponseError({response}) {
-        // 3. Global error handling (e.g., redirect on 401)
+    onResponseError({ response }) {
         if (response.status === 401 && !response.url.includes('login')) {
-            localStorage.removeItem('token',)
+            if (import.meta.client) {
+                localStorage.removeItem('token')
+            }
             navigateTo('/login')
         }
     }

@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-            postchiApi: ''
+            postchiApi: 'https://postchi-backend-s76aq.sevalla.app'
         }
     },
     routeRules: {

@@ -3,16 +3,8 @@ import {type Account, AccountType} from "~~/server/api/account";
 
 import LicenceDashboard from "~/components/licenceDashboard.vue";
 import IndividualLicence from "~/components/IndividualLicence.vue";
-import {useApi} from "~/composable/useApi";
 
-
-const {data: user} = useApi<Account>('/dashboard/account', {
-  method: 'GET',
-});
-
-console.log(user?.value?.type);
-
-
+const { data: user } = useFetch<Account>('/dashboard/account', { $fetch: $api });
 </script>
 
 <template>
