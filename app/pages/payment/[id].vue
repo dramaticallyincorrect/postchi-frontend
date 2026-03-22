@@ -77,7 +77,7 @@ onMounted(() => {
         }
       ],
       settings: {
-        successUrl: "http://localhost:3000/purchaseSuccess"
+        successUrl: "http://getpostchi.com/purchaseSuccess"
       },
       customer: customer,
       customData: {
