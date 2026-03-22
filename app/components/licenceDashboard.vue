@@ -88,7 +88,9 @@ async function inviteUser(event: FormSubmitEvent<Schema>) {
           >
             <td class="px-4 py-3">{{ licence.email }}</td>
             <td class="px-4 py-3 font-mono text-xs uppercase tracking-widest">{{ licence.key }}</td>
-            <td class="px-4 py-3 text-muted">{{ licence.creationDate }}</td>
+            <td class="px-4 py-3 text-muted">
+              <NuxtTime :datetime="licence.creationDate" month="short" day="numeric" year="numeric" />
+            </td>
             <td class="px-4 py-3">
               <UBadge :color="licence.activated ? 'success' : 'warning'" variant="subtle" size="sm">
                 {{ licence.activated ? 'Activated' : 'Pending' }}
