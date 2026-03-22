@@ -1,32 +1,25 @@
 <script setup lang="ts">
 import {type TokenResponse} from "~~/server/api/TokenResponse";
-import {useApi} from "~/composable/useApi";
 
 definePageMeta({
   layout: false,
 });
 
 useHead({
-  bodyAttrs: {
-    class: "h-full"
-  },
-  htmlAttrs: {
-    class: "h-full"
-  },
+  bodyAttrs: { class: "h-full" },
+  htmlAttrs: { class: "h-full" },
 })
 
-let route = useRoute()
+const route = useRoute()
+const otp = route.query.code;
+const error = ref(false);
 
-let otp = route.query.code;
-
-const {data: response, error} = await useApi<TokenResponse>(`/otp?code=${otp}`, {
-  method: 'POST'
-})
-
-if (response.value != null) {
-  localStorage.setItem('token', response.value.token);
-  navigateTo('/setPassword')
-}
+await $api<TokenResponse>(`/otp?code=${otp}`, { method: 'POST' })
+  .then(response => {
+    localStorage.setItem('token', response.token)
+    navigateTo('/setPassword')
+  })
+  .catch(() => { error.value = true })
 
 </script>
 
