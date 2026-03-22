@@ -76,7 +76,6 @@ async function inviteUser(event: FormSubmitEvent<Schema>) {
             <th class="text-left px-4 py-3 text-muted font-medium w-[28%]">Email</th>
             <th class="text-left px-4 py-3 text-muted font-medium w-[32%]">Licence Key</th>
             <th class="text-left px-4 py-3 text-muted font-medium w-[15%]">Created</th>
-            <th class="text-left px-4 py-3 text-muted font-medium w-[15%]">Status</th>
             <th class="text-left px-4 py-3 text-muted font-medium w-[10%]">Delete</th>
           </tr>
         </thead>
@@ -84,17 +83,12 @@ async function inviteUser(event: FormSubmitEvent<Schema>) {
           <tr
             v-for="licence in licences"
             :key="licence.key"
-            class="border-b border-default last:border-b-0 hover:bg-elevated"
+            class="border-b border-default last:border-b-0"
           >
             <td class="px-4 py-3">{{ licence.email }}</td>
             <td class="px-4 py-3 font-mono text-xs uppercase tracking-widest">{{ licence.key }}</td>
             <td class="px-4 py-3 text-muted">
               <NuxtTime :datetime="licence.creationDate" month="short" day="numeric" year="numeric" />
-            </td>
-            <td class="px-4 py-3">
-              <UBadge :color="licence.activated ? 'success' : 'warning'" variant="subtle" size="sm">
-                {{ licence.activated ? 'Activated' : 'Pending' }}
-              </UBadge>
             </td>
             <td class="px-4 py-3">
               <button
