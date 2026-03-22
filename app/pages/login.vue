@@ -49,7 +49,7 @@ async function login(e: Event) {
         <div>
           <div class="flex items-center justify-between mb-2">
             <label for="password" class="block text-sm font-medium text-slate-700 dark:text-slate-200">Password</label>
-            <a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 dark:text-amber-400 dark:hover:text-amber-300">Forgot password?</a>
+            <NuxtLink :to="{ path: '/forgotPassword', query: email ? { email } : {} }" class="text-sm font-semibold text-amber-600 hover:text-amber-500 dark:text-amber-400 dark:hover:text-amber-300">Forgot password?</NuxtLink>
           </div>
           <UInput v-model="password" type="password" id="password" autocomplete="current-password" required size="lg" class="w-full"/>
         </div>
