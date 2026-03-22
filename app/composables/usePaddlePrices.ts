@@ -18,8 +18,8 @@ export const usePaddlePrices = () => {
     isFetching.value = true
     try {
       const paddle = await initializePaddle({
-        environment: 'sandbox',
-        token: 'test_5ab60d9d332161a26e0cfe66605',
+        environment: 'production',
+        token: paddleKey,
       })
 
       const result: PricePreviewResponse = await paddle!.PricePreview({

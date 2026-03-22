@@ -46,10 +46,11 @@ const state = reactive({
 const toast = useToast()
 
 async function onSubmit(event: FormSubmitEvent<Individual | Organization>) {
+  event.preventDefault()
   if (id === individualId) {
-    navigateTo(`/payment/pri_01kb3n17k8vzgy4vdafcxtanhx?email=${state.email}`)
+    navigateTo(`/payment/${individualId}?email=${state.email}`)
   } else {
-    navigateTo(`/payment/pri_01kb3n774k95ee7njf08n0exr9?email=${state.email}&billing=${state.billingEmail}&name=${state.name}&seats=${state.numberOfSeats}`)
+    navigateTo(`/payment/${businessId}?email=${state.email}&billing=${state.billingEmail}&name=${state.name}&seats=${state.numberOfSeats}`)
   }
 }
 

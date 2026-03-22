@@ -21,7 +21,7 @@ let pricingInfo = ref<{
 } | null>(null);
 
 const paddle = await initializePaddle({
-  environment: 'sandbox', token: 'test_5ab60d9d332161a26e0cfe66605', checkout: {
+  environment: 'production', token: paddleKey, checkout: {
     settings: {
       displayMode: "inline",
       variant: "one-page",

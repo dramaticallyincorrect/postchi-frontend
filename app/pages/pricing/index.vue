@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {navigateTo} from "#app";
 import { usePaddlePrices } from "~/composables/usePaddlePrices";
+import { businessId, individualId } from "~/constants/prices";
 
 definePageMeta({
   layout: 'header',
@@ -36,7 +37,7 @@ const tiers = computed(() => {
       billingCycle: '/year',
       button: {
         label: 'Buy now',
-        onClick: () => { navigateTo('/payment/billingInfo?type=pri_01kb3n17k8vzgy4vdafcxtanhx') }
+        onClick: () => { navigateTo(`/payment/billingInfo?type=${individualId}`) }
       }
     },
     {
@@ -47,7 +48,7 @@ const tiers = computed(() => {
       billingCycle: '/year/user',
       button: {
         label: 'Buy Now',
-        onClick: () => { navigateTo('/payment/billingInfo?type=pri_01kb3n774k95ee7njf08n0exr9') }
+        onClick: () => { navigateTo(`/payment/billingInfo?type=${businessId}`) }
       }
     }
   ]
@@ -146,63 +147,14 @@ const sections = ref([
         }
       }
     ]
-  },
-  {
-    title: 'Coming Soon',
-    features: [
-      {
-        title: 'Open Api Sync',
-        tiers: {
-          free: 'TBD',
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Web Sockets',
-        tiers: {
-          free: 'TBD',
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'GraphQL',
-        tiers: {
-          free: 'TBD',
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Functions',
-        tiers: {
-          free: 'TBD',
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Advanced Scripting',
-        tiers: {
-          free: 'TBD',
-          individual: true,
-          teams: true
-        }
-      }
-    ]
   }
 ])
 
 
 const faq = ref([
   {
-    label: 'Why some features are under Coming Soon?',
-    content: 'These features such as websockets and graphql are not yet implemented but are planned and will be in later version of postchi, very soon!!'
-  },
-  {
     label: 'What happens when my subscription ends?',
-    content: 'Individual licenses can keep using the last version that was released during the time of their subscription, Team licenses are only active while the subscription has not ended'
+    content: 'Individual licenses can keep using the last version that was released during the time of their subscription, Team licenses are only active while the subscription has not ended, if license expires, the app will switch to free mode'
   },
   {
     label: 'Lifetime Fallback',
