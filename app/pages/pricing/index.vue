@@ -131,6 +131,14 @@ const sections = ref([
         }
       },
       {
+        title: 'Actions',
+        tiers: {
+          free: false,
+          individual: true,
+          teams: true
+        }
+      },
+      {
         title: 'Folder Configuration',
         tiers: {
           free: false,
