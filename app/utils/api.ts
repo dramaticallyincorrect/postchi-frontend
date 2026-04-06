@@ -1,5 +1,5 @@
 export const $api = $fetch.create({
-    baseURL: 'https://postchi-backend-s76aq.sevalla.app',
+    baseURL: 'https://api.getpostchi.com',
     onRequest({ options, request }) {
         const url = typeof request === 'string' ? request : request.url
         if (url.startsWith('/dashboard') && import.meta.client) {
