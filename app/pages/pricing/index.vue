@@ -1,187 +1,129 @@
 <script setup lang="ts">
 import {navigateTo} from "#app";
 import { usePaddlePrices } from "~/composables/usePaddlePrices";
-import { businessId, individualId } from "~/constants/prices";
+import { businessId } from "~/constants/prices";
 
 definePageMeta({
   layout: 'header',
 });
 
-const { prices, isFetching, fetchPrices } = usePaddlePrices()
+const { prices, fetchPrices } = usePaddlePrices()
 
-// Fetch prices if not already cached (e.g. user landed directly on this page)
 onMounted(() => { fetchPrices() })
 
 const loading = computed(() => prices.value === null)
 
+const allFeatures = [
+  'OpenApi Sync & Integration',
+  'Intellisense',
+  'Scripts',
+  'Actions',
+  'Theme & Customization',
+]
+
 const tiers = computed(() => {
   const p = prices.value
   if (!p) return undefined
+
+  const annualAmount = parseFloat(p.businessTotal.replace(/[^0-9.]/g, '')) || 0
+  const monthlyAmount = (annualAmount / 12).toFixed(2)
+  const monthlyPrice = `${p.currency}${monthlyAmount}`
+  const annualPrice = `${p.businessTotal}`
+
   return [
     {
       id: 'free',
       title: 'Free',
       price: `${p.currency}0`,
-      description: 'Try out postchi',
+      description: 'Everything you need to get started. Perfect for personal projects.',
+      features: allFeatures,
       button: {
-        label: 'Download',
+        label: 'Download for free',
         variant: 'outline' as const,
         onClick: () => { navigateTo('/download') }
       }
     },
     {
-      id: 'individual',
-      title: 'Individual',
-      price: p.individualTotal,
-      description: 'For individuals',
-      billingCycle: '/year',
+      id: 'work',
+      title: 'Work',
+      price: monthlyPrice,
+      billingNote: `${annualPrice} billed annually`,
+      description: 'For professionals and teams that need commercial use.',
+      highlight: true,
+      features: [
+        'Everything in free plan',
+        'Commercial use',
+        'Admin dashboard',
+        'Dedicated support',
+        'Custom payment options',
+      ],
       button: {
-        label: 'Buy now',
-        onClick: () => { navigateTo(`/payment/billingInfo?type=${individualId}`) }
-      }
-    },
-    {
-      id: 'teams',
-      title: 'Teams',
-      price: p.businessTotal,
-      description: 'For teams of any size',
-      billingCycle: '/year/user',
-      button: {
-        label: 'Buy Now',
+        label: 'Get started',
         onClick: () => { navigateTo(`/payment/billingInfo?type=${businessId}`) }
       }
-    }
+    },
   ]
 })
-
-const sections = ref([
-  {
-    title: 'Features',
-    features: [
-      {
-        title: 'Lifetime Fallback',
-        tiers: {
-          free: 'N/A',
-          individual: true,
-          teams: false
-        }
-      },
-      {
-        title: 'Transferable Licences',
-        tiers: {
-          free: false,
-          individual: false,
-          teams: true
-        }
-      },
-      {
-        title: 'Active Devices',
-        tiers: {
-          free: 'N/A',
-          individual: 3,
-          teams: 2
-        }
-      },
-      {
-        title: 'Http',
-        tiers: {
-          free: true,
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Environments',
-        tiers: {
-          free: true,
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Intellisense',
-        tiers: {
-          free: true,
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Theme and Customization',
-        tiers: {
-          free: true,
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Request Scripts',
-        tiers: {
-          free: true,
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Folder Scripts',
-        tiers: {
-          free: false,
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Actions',
-        tiers: {
-          free: false,
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Folder Configuration',
-        tiers: {
-          free: false,
-          individual: true,
-          teams: true
-        }
-      },
-      {
-        title: 'Email Support',
-        tiers: {
-          free: false,
-          individual: true,
-          teams: true
-        }
-      }
-    ]
-  }
-])
-
-
-const faq = ref([
-  {
-    label: 'What happens when my subscription ends?',
-    content: 'Individual licenses can keep using the last version that was released during the time of their subscription, Team licenses are only active while the subscription has not ended, if license expires, the app will switch to free mode'
-  },
-  {
-    label: 'Lifetime Fallback',
-    content: 'Individual Licenses can always be used for versions released during the time of subscription even after subscription ends'
-  },
-])
 
 
 </script>
 
 
 <template>
-  <UPage class="mt-6 flex flex-col w-10/12 place-self-center max-w-7xl" v-if="!loading">
-    <UPricingTable :tiers="tiers ?? []" :sections="sections"/>
+  <UPage class="mt-10 flex flex-col w-10/12 place-self-center max-w-4xl" v-if="!loading">
 
-    <div class="mt-20 mb-20 ">
-      <span class="text-6xl mb-4 block place-self-center">Frequently Asked Questions</span>
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold mb-3">Simple, transparent pricing</h1>
+      <p class="text-gray-500 dark:text-gray-400 text-lg">All features free. A license is required for work use.</p>
+    </div>
 
-      <UAccordion :items="faq"/>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto w-full">
+      <div
+        v-for="tier in tiers"
+        :key="tier.id"
+        :class="[
+          'rounded-2xl border p-8 flex flex-col gap-6',
+          tier.highlight
+            ? 'border-primary-500 dark:border-primary-400 bg-primary-50 dark:bg-primary-950/40'
+            : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900'
+        ]"
+      >
+        <!-- Plan name + price -->
+        <div>
+          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">{{ tier.title }}</p>
+          <div class="flex items-end gap-1.5">
+            <span class="text-5xl font-bold tracking-tight">{{ tier.price }}</span>
+            <span v-if="tier.billingNote" class="text-base text-gray-500 dark:text-gray-400 mb-1.5">/month</span>
+          </div>
+          <p v-if="tier.billingNote" class="text-sm text-gray-400 dark:text-gray-500 mt-1">{{ tier.billingNote }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">{{ tier.description }}</p>
+        </div>
+
+        <!-- CTA -->
+        <UButton
+          :label="tier.button.label"
+          :variant="tier.button.variant ?? 'solid'"
+          :color="tier.highlight ? 'primary' : 'neutral'"
+          size="lg"
+          block
+          @click="tier.button.onClick"
+        />
+
+        <!-- Divider -->
+        <div class="border-t border-gray-200 dark:border-gray-700"/>
+
+        <!-- Features -->
+        <ul class="flex flex-col gap-3 flex-1">
+          <li
+            v-for="feature in tier.features"
+            :key="feature"
+            class="flex items-center gap-3 text-sm"
+          >
+            <UIcon name="i-heroicons-check" class="text-primary-500 shrink-0 w-4 h-4 font-bold"/>
+            <span>{{ feature }}</span>
+          </li>
+        </ul>
+      </div>
     </div>
 
   </UPage>

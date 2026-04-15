@@ -18,7 +18,7 @@ onMounted(() => { fetchPrices() })
       <div class="relative transition-colors duration-500 overflow-hidden">
 
         <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-[radial-gradient(circle_at_50%_0%,_rgba(245,158,11,0.08)_0%,_transparent_50%)]"></div>
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-[radial-gradient(circle_at_50%_0%,rgba(245,158,11,0.08)_0%,transparent_50%)]"></div>
 
         <!-- Constellation stars -->
         <svg class="absolute top-0 left-0 w-full h-[480px] pointer-events-none select-none" viewBox="0 0 1440 480" preserveAspectRatio="xMidYTop slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -114,14 +114,14 @@ onMounted(() => { fetchPrices() })
             Download Postchi
           </UButton>
 
-          <img src="/postchi.png" alt="Postchi App" class="rounded-lg w-full" />
+          <img src="/postchi.webp" alt="Postchi App" class="rounded-lg w-full" />
         </section>
 
         <div class="max-w-7xl mx-auto px-6 py-4">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <UPageFeature
-                title="Clear"
-                description="See your entire request at a glance in a format you already understand."
+                title="OpenApi Integration"
+                description="Automaticlly sync with open api changes, provide auto complete and errors"
                 icon="i-pixelarticons-visible"
                 class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors p-6 rounded-xl border border-transparent hover:border-slate-200 dark:hover:border-slate-800"
             />

@@ -48,7 +48,7 @@ function copyLicence(licence: Licence, e: Event) {
           v-for="licence in licences"
           :key="licence.key"
           v-on:click="copyLicence(licence, $event)"
-          class="flex items-center justify-between cursor-pointer border border-[var(--ui-border)] hover:border-brand rounded-lg px-4 py-3 transition-colors duration-150 select-none"
+          class="flex items-center justify-between cursor-pointer border border-default hover:border-brand rounded-lg px-4 py-3 transition-colors duration-150 select-none"
         >
           <span class="uppercase tracking-widest font-mono text-sm">{{ licence.key }}</span>
           <UBadge color="neutral" variant="outline" size="sm">

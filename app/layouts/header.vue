@@ -70,7 +70,7 @@ const footers = [
           <UButton
               color="neutral"
               variant="ghost"
-              to="https://github.com/dramaticclyIncorrect/postchi"
+              to="https://github.com/dramaticallyincorrect/postchi"
               target="_blank"
               icon="i-simple-icons-github"
               aria-label="GitHub"

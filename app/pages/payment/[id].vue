@@ -7,7 +7,7 @@ import {navigateTo} from "#app";
 import {type CheckoutCustomer, type CheckoutEventsTotals, initializePaddle} from '@paddle/paddle-js';
 
 import {useHead} from "#imports";
-import {businessId, individualId} from "~/constants/prices";
+import {businessId} from "~/constants/prices";
 
 const route = useRoute();
 
@@ -50,12 +50,7 @@ onMounted(() => {
     let customer: CheckoutCustomer;
     let seats = Number.parseInt(<string>route.query['seats']);
     const orgName = <string>route.query.name;
-    if (id == individualId) {
-      customer = {
-        email: email,
-      }
-    } else {
-      const billingEmail = <string>route.query.billing;
+    const billingEmail = <string>route.query.billing;
 
 
       console.log(billingEmail);
@@ -67,13 +62,12 @@ onMounted(() => {
       customer = {
         email: billingEmail,
       }
-    }
 
     paddle?.Checkout.open({
       items: [
         {
           priceId: route.params.id as string,
-          quantity: id == individualId ? 1 : seats
+          quantity: seats
         }
       ],
       settings: {

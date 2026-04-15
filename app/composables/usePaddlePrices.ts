@@ -1,8 +1,7 @@
 import { initializePaddle, type PricePreviewResponse } from '@paddle/paddle-js'
-import { businessId, individualId } from '~/constants/prices'
+import { businessId } from '~/constants/prices'
 
 export interface PaddlePrices {
-  individualTotal: string
   businessTotal: string
   currency: string
 }
@@ -24,19 +23,16 @@ export const usePaddlePrices = () => {
 
       const result: PricePreviewResponse = await paddle!.PricePreview({
         items: [
-          { quantity: 1, priceId: individualId },
-          { quantity: 2, priceId: businessId },
+          { quantity: 1, priceId: businessId },
         ],
       })
 
       const items = result.data.details.lineItems
-      const individualTotal = items.find(v => v.price.id === individualId)?.formattedUnitTotals.total ?? ''
       const businessTotal = items.find(v => v.price.id === businessId)?.formattedUnitTotals.total ?? ''
 
       prices.value = {
-        individualTotal,
         businessTotal,
-        currency: individualTotal.charAt(0),
+        currency: businessTotal.replace(/[\d.,\s]/g, '').trim(),
       }
     } catch (error) {
       console.error('Failed to fetch Paddle prices:', error)
