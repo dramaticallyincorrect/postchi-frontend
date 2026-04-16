@@ -71,8 +71,7 @@ const tiers = computed(() => {
   <UPage class="mt-10 flex flex-col w-10/12 place-self-center max-w-4xl" v-if="!loading">
 
     <div class="text-center mb-12">
-      <h1 class="text-5xl font-bold mb-3">Simple, transparent pricing</h1>
-      <p class="text-gray-500 dark:text-gray-400 text-lg">All features free. A license is required for work use.</p>
+      <p class="text-2xl">All features free. A license is required for work use.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto w-full">

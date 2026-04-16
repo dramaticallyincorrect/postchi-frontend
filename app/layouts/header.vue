@@ -51,7 +51,7 @@ const footers = [
 <template>
   <div class="min-h-screen flex flex-col">
     <nav
-        class="border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between bg-white/50 dark:bg-[#0b0e14]/50 backdrop-blur-md sticky top-0 z-50">
+        class="px-4 py-3 flex items-center justify-between bg-white/50 dark:bg-[#111111]/50 backdrop-blur-md sticky top-0 z-50">
       <div class="flex items-center gap-6">
         <div class="flex flex-row items-center gap-2">
           <ULink to="/">
