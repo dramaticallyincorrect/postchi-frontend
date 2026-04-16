@@ -28,32 +28,30 @@ const tiers = computed(() => {
   const annualAmount = parseFloat(p.businessTotal.replace(/[^0-9.]/g, '')) || 0
   const monthlyAmount = (annualAmount / 12).toFixed(2)
   const monthlyPrice = `${p.currency}${monthlyAmount}`
-  const annualPrice = `${p.businessTotal}`
 
   return [
     {
       id: 'free',
       title: 'Free',
       price: `${p.currency}0`,
-      description: 'Everything you need to get started. Perfect for personal projects.',
+      description: 'Every feature, for personal use. \n',
       features: allFeatures,
       button: {
-        label: 'Download for free',
+        label: 'Download Now',
         variant: 'outline' as const,
-        onClick: () => { navigateTo('/download') }
+        onClick: () => { navigateTo('/download') },
       }
     },
     {
       id: 'work',
       title: 'Work',
       price: monthlyPrice,
-      billingNote: `${annualPrice} billed annually`,
+      billingNote: `billed annually`,
       description: 'For professionals and teams that need commercial use.',
       highlight: true,
       features: [
         'Everything in free plan',
         'Commercial use',
-        'Admin dashboard',
         'Dedicated support',
         'Custom payment options',
       ],
@@ -99,16 +97,6 @@ const tiers = computed(() => {
           <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">{{ tier.description }}</p>
         </div>
 
-        <!-- CTA -->
-        <UButton
-          :label="tier.button.label"
-          :variant="tier.button.variant ?? 'solid'"
-          :color="tier.highlight ? 'primary' : 'neutral'"
-          size="lg"
-          block
-          @click="tier.button.onClick"
-        />
-
         <!-- Divider -->
         <div class="border-t border-gray-200 dark:border-gray-700"/>
 
@@ -123,6 +111,16 @@ const tiers = computed(() => {
             <span>{{ feature }}</span>
           </li>
         </ul>
+
+        <!-- CTA -->
+        <UButton
+          :label="tier.button.label"
+          :variant="tier.button.variant ?? 'solid'"
+          :color="tier.highlight ? 'primary' : 'neutral'"
+          size="lg"
+          block
+          @click="tier.button.onClick"
+        />
       </div>
     </div>
 
