@@ -104,8 +104,6 @@ useHead(
             pricingInfo.pricing.total
           }}</span><span> per year</span><br>
         <span class="text-muted mb-4 block" v-if="id == businessId">{{ route.query.seats }} seats</span>
-        <span class="text-muted">Access to all features with one year of updates<br>
-own all the versions released during your subscription</span>
       </div>
     </div>
     <div class="flex-1  h-dvh" v-if="pricingInfo == null"></div>

@@ -72,6 +72,7 @@ const tiers = computed(() => {
 
     <div class="text-center mb-12">
       <p class="text-2xl">All features free. A license is required for work use.</p>
+      <p>Purchasing a license supports continued development.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto w-full">
@@ -123,5 +124,9 @@ const tiers = computed(() => {
       </div>
     </div>
 
+    <div class="mt-10 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 p-8 text-center space-y-2">
+      <p class="text-lg font-semibold text-gray-800 dark:text-gray-100">If you can't afford it, you have my blessing to use it.</p>
+      <p class="text-sm text-gray-500 dark:text-gray-400">If you don't like subscriptions, pay what you feel it's worth, then cancel.</p>
+    </div>
   </UPage>
 </template>
