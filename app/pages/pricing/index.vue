@@ -34,7 +34,7 @@ const tiers = computed(() => {
       id: 'free',
       title: 'Free',
       price: `${p.currency}0`,
-      description: 'Every feature, for personal use. \n',
+      description: 'Every feature, free. \n',
       features: allFeatures,
       button: {
         label: 'Download Now',
