@@ -47,13 +47,10 @@ const tiers = computed(() => {
       title: 'Work',
       price: monthlyPrice,
       billingNote: `billed annually`,
-      description: 'For professionals and teams. Includes commercial use and supports ongoing development.',
+      description: 'supports the project development.',
       highlight: true,
       features: [
-        'Everything in free plan',
-        'Commercial use',
-        'Dedicated support',
-        'Custom payment options',
+        'Helps postchi stay viable',
       ],
       button: {
         label: 'Get started',
