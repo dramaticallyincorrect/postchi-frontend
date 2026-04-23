@@ -8,8 +8,8 @@ const route = useRoute();
 const items = computed(() => {
   return [{
     label: '~/Download',
-    to: '/pricing',
-    active: route.path.startsWith('/pricing')
+    to: '/download',
+    active: route.path.startsWith('/download')
   }, {
     label: '~/Login',
     to: '/login',

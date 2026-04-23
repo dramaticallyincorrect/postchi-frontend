@@ -6,7 +6,7 @@ definePageMeta({
   layout: 'header',
 });
 
-// Prefetch Paddle prices in the background so the pricing page loads instantly
+// Prefetch Paddle prices in the background
 const { fetchPrices } = usePaddlePrices()
 onMounted(() => { fetchPrices() })
 
@@ -110,7 +110,7 @@ onMounted(() => { fetchPrices() })
           </p>
 
           <UButton size="xl" color="primary"
-                   class="rounded-full px-8 font-bold mb-4" to="pricing">
+                   class="rounded-full px-8 font-bold mb-4" to="download">
             Download Postchi
           </UButton>
 
@@ -205,7 +205,7 @@ onMounted(() => { fetchPrices() })
 
               <div class="flex flex-col items-center gap-6">
                 <UButton size="xl" color="primary" variant="outline"
-                         class="rounded-full px-8 font-bold shadow-xl shadow-amber-500/10" to="pricing">
+                         class="rounded-full px-8 font-bold shadow-xl shadow-amber-500/10" to="download">
                   Download Postchi
                 </UButton>
 

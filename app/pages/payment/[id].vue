@@ -44,7 +44,7 @@ const paddle = await initializePaddle({
 
 onMounted(() => {
   if (!email) {
-    navigateTo('/pricing')
+    navigateTo('/download')
     return;
   } else {
     let customer: CheckoutCustomer;
@@ -55,7 +55,7 @@ onMounted(() => {
 
       console.log(billingEmail);
       if (!billingEmail || !seats || !orgName) {
-        navigateTo('/pricing')
+        navigateTo('/download')
         return;
       }
 
