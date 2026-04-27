@@ -34,12 +34,7 @@ const footers = [
     to: 'privacy',
     target: '_blank'
   },
-  {
-    label: 'Refund Policy',
-    to: 'refund',
-    target: '_blank'
-  },
-  {
+{
     label: 'terms and conditions',
     to: 'terms',
     target: '_blank'

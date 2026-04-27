@@ -12,7 +12,7 @@ definePageMeta({
   <div class="max-w-4xl mx-auto px-6 py-12">
     <header class="mb-12">
       <h1 class="text-4xl font-bold mb-4">Terms of Service</h1>
-      <p class="text-muted-foreground">Last Updated: January 19, 2026</p>
+      <p class="text-muted-foreground">Last Updated: April 27, 2026</p>
     </header>
 
     <div class="bg-card text-card-foreground rounded-lg shadow-sm p-8 space-y-8">
@@ -22,68 +22,41 @@ definePageMeta({
       </section>
 
       <section>
-        <h2 class="text-2xl font-semibold mb-4">2. License Types and Pricing</h2>
-        <p class="leading-relaxed mb-4">The App is available under the following license types:</p>
-
-        <div class="ml-4 space-y-6">
-          <div class="border-l-4 border-success/50 pl-4">
-            <h3 class="text-lg font-semibold mb-2">2.1 Free Version</h3>
-            <p class="leading-relaxed">The free version provides basic functionality at no cost. We reserve the right to modify or discontinue the free version at any time.</p>
-          </div>
-
-          <div class="border-l-4 border-success/50 pl-4">
-            <h3 class="text-lg font-semibold mb-2">2.2 Individual License</h3>
-            <p class="leading-relaxed mb-2">The Individual License is valid for one (1) year from the date of purchase and includes:</p>
-            <ul class="list-disc ml-6 mt-2 space-y-1">
-              <li>Access to all premium features</li>
-              <li>Updates released during the subscription period</li>
-              <li>Perpetual use of App versions released during your active subscription</li>
-              <li>Use on devices owned or controlled by a single individual</li>
-            </ul>
-            <p class="leading-relaxed mt-3">After the subscription expires, you may continue to use versions of the App that were released during your active subscription period, but you will not receive new updates or access to versions released after expiration.</p>
-          </div>
-
-          <div class="border-l-4 border-success/50 pl-4">
-            <h3 class="text-lg font-semibold mb-2">2.3 Team License</h3>
-            <p class="leading-relaxed mb-2">The Team License is valid for one (1) year from the date of purchase and includes:</p>
-            <ul class="list-disc ml-6 mt-2 space-y-1">
-              <li>Access to all premium features for multiple users within an organization</li>
-              <li>Updates released during the subscription period</li>
-              <li>Access valid only for the duration of the active subscription</li>
-              <li>Number of seats as specified at the time of purchase</li>
-            </ul>
-            <p class="leading-relaxed mt-3">The Team License requires an active subscription. Upon expiration, the App will revert to free version functionality unless the subscription is renewed.</p>
-          </div>
-        </div>
+        <h2 class="text-2xl font-semibold mb-4">2. Free Access</h2>
+        <p class="leading-relaxed mb-4">Postchi is free to use. All features are available to every user at no cost. We reserve the right to modify or discontinue any aspect of the App at any time.</p>
+        <p class="leading-relaxed">You may optionally make a voluntary payment to support the ongoing development of the App. This support payment is entirely optional and does not unlock additional features or create any subscription or obligation.</p>
       </section>
 
       <section>
-        <h2 class="text-2xl font-semibold mb-4">3. Payment and Renewal</h2>
-        <p class="leading-relaxed mb-3">All payments are processed securely through our payment provider. Subscriptions automatically renew unless manually disabled.</p>
-        <p class="leading-relaxed">All fees are non-refundable except as required by law or as explicitly stated in our refund policy.</p>
+        <h2 class="text-2xl font-semibold mb-4">3. Optional Support Payments</h2>
+        <p class="leading-relaxed mb-3">If you choose to make a voluntary support payment, please note the following:</p>
+        <ul class="list-disc ml-6 space-y-2">
+          <li>Support payments are voluntary contributions and are not required to use the App</li>
+          <li>Payments are processed securely through our payment provider</li>
+          <li>Support payments are recurring and will automatically renew until canceled</li>
+          <li>You may cancel your support payment at any time; cancellation takes effect at the end of the current billing period</li>
+          <li>Support payments are non-refundable</li>
+          <li>Making a support payment does not create a license or any contractual entitlement to features, updates, or support</li>
+        </ul>
       </section>
 
       <section>
         <h2 class="text-2xl font-semibold mb-4">4. Permitted Use</h2>
-        <p class="leading-relaxed mb-3">You may use the App in accordance with your license type. You agree not to:</p>
+        <p class="leading-relaxed mb-3">The App is released under the MIT License, which grants broad rights to use, copy, modify, merge, publish, distribute, sublicense, and sell the App. You agree not to:</p>
         <ul class="list-disc ml-6 space-y-2">
-          <li>Reverse engineer, decompile, or disassemble the App</li>
-          <li>Remove or modify any proprietary notices or labels</li>
-          <li>Share your Individual License with others or use it on more devices than permitted</li>
-          <li>Exceed the number of seats included in your Team License</li>
+          <li>Remove or alter the copyright and license notices required by the MIT License</li>
           <li>Use the App for any illegal or unauthorized purpose</li>
-          <li>Distribute, sublicense, or resell the App without authorization</li>
         </ul>
       </section>
 
       <section>
         <h2 class="text-2xl font-semibold mb-4">5. Intellectual Property</h2>
-        <p class="leading-relaxed">The App and all associated intellectual property rights remain the exclusive property of the developer. These Terms grant you a limited, non-exclusive, non-transferable license to use the App in accordance with your license type.</p>
+        <p class="leading-relaxed">The App is released under the MIT License. Copyright and all associated intellectual property rights remain the property of the developer. The MIT License grants you broad rights to use, copy, modify, merge, publish, distribute, sublicense, and sell the App, provided the copyright and license notice is preserved in all copies or substantial portions of the App.</p>
       </section>
 
       <section>
         <h2 class="text-2xl font-semibold mb-4">6. Updates and Modifications</h2>
-        <p class="leading-relaxed">We may update the App from time to time. Your access to updates depends on your license type and subscription status as described in Section 2. We reserve the right to modify, suspend, or discontinue any aspect of the App at any time.</p>
+        <p class="leading-relaxed">We may update the App from time to time. We reserve the right to modify, suspend, or discontinue any aspect of the App at any time.</p>
       </section>
 
       <section>
@@ -102,7 +75,7 @@ definePageMeta({
 
       <section>
         <h2 class="text-2xl font-semibold mb-4">9. Termination</h2>
-        <p class="leading-relaxed">We reserve the right to terminate or suspend your access to the App at any time for violation of these Terms. Upon termination, you must cease all use of the App and delete all copies in your possession.</p>
+        <p class="leading-relaxed">Because the App is released under the MIT License, your rights to the software itself are perpetual and governed by that license. We may, however, suspend or terminate your access to any associated online services or accounts (such as support or payment processing) for violation of these Terms.</p>
       </section>
 
       <section>
